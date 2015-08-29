@@ -87,3 +87,11 @@ def borrar(sku):
     con.close()
     return exito
 
+def obtener_TotalProducto(sku):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT COUNT(producto_sku) FROM detalle WHERE producto_sku = ?"
+    resultado = c.execute(query, [sku])
+    producto = resultado.fetchone()
+    con.close()
+    return producto[0]
