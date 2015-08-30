@@ -55,6 +55,8 @@ def producto_nom(nombre):
     con.close()
     return producto
 
+
+
 def crear_producto(sku, nombre, descripcion, marca, color, imagen, Precio):
     con = conectar()
     c = con.cursor()
