@@ -74,7 +74,7 @@ class FormCliente(QtGui.QDialog):
         except sqlite3.Error as e:
             
             msgBox = QtGui.QMessageBox()
-            msgBox.setText(u"Rut Existente!")
+            msgBox.setText(u"Error Rut invalido!!")
             msgBox.exec_() 
         
         
