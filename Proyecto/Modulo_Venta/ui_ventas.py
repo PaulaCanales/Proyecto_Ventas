@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ventas.ui'
 #
-# Created: Fri Aug 28 14:23:27 2015
+# Created: Sun Aug 30 01:09:45 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,6 +33,8 @@ class Ui_Form(object):
         self.label.setObjectName("label")
         self.gridLayout_2.addWidget(self.label, 1, 0, 1, 1)
         self.fecha = QtGui.QDateEdit(self.layoutWidget)
+        self.fecha.setWrapping(False)
+        self.fecha.setCalendarPopup(True)
         self.fecha.setObjectName("fecha")
         self.gridLayout_2.addWidget(self.fecha, 1, 1, 1, 1)
         self.label_2 = QtGui.QLabel(self.layoutWidget)
