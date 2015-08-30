@@ -111,8 +111,9 @@ class Main(QtGui.QWidget):
             return False    
         else:
             folio = data.index(index.row(), 0, QtCore.QModelIndex()).data()
+            rut = data.index(index.row(), 1, QtCore.QModelIndex()).data()
             print folio
-            self.ui.form = FormVenta(self, folio)
+            self.ui.form = FormVenta(self, folio,rut)
             self.ui.form.accepted.connect(self.load_data)
             self.ui.form.show()
 

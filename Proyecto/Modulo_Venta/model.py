@@ -127,7 +127,7 @@ def editar_venta(folio, cliente_rut, cantidad, precio_unitario):
     c = con.cursor()
     sql=(
         "UPDATE detalle SET cantidad=?, precio_unitario=?, total=? WHERE venta_folio=?, cliente_rut=? ")
-    total= precio_unitario*cantidad
+    total= 3 #int(precio_unitario)*int(cantidad)
     c.execute(sql, [cantidad, precio_unitario, total, folio, cliente_rut])
     con.commit()
 
