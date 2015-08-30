@@ -119,16 +119,16 @@ def agregar_venta(folio, sku, cantidad, precio):
     c.execute(sql, (folio, sku, cantidad, precio, total))
     con.commit()
 
-def editar_venta(folio, cliente_rut, cantidad, precio_unitario):
+def editar_venta(folio, producto_sku, cantidad, precio_unitario):
     """
     Se edita la tabla de detalle.
     """
     con=conectar()
     c = con.cursor()
     sql=(
-        "UPDATE detalle SET cantidad=?, precio_unitario=?, total=? WHERE venta_folio=?, cliente_rut=? ")
-    total= 3 #int(precio_unitario)*int(cantidad)
-    c.execute(sql, [cantidad, precio_unitario, total, folio, cliente_rut])
+        "UPDATE detalle SET cantidad=?, precio_unitario=?, total=? WHERE venta_folio=? and producto_sku=? ")
+    total= precio_unitario*cantidad
+    c.execute(sql, [cantidad,precio_unitario, total, folio, producto_sku])
     con.commit()
 
 def borrar(folio):

@@ -6,7 +6,7 @@ from ui_ventas import Ui_Form as ui_venta
 import model as db_model
 
 class FormVenta(QtGui.QDialog):
-    rut1=0
+    
     def __init__(self, parent=None, folio=None,rut=None):
         """
         Formulario para crear y editar cliente.
@@ -23,7 +23,7 @@ class FormVenta(QtGui.QDialog):
             for dato in range(len(rut)):
                 self.ui.comboRut.addItem(str(rut[dato][0]))
         else:
-            self.rut1=rut
+            
             self.ui.comboRut.addItem(str(rut))
             detalle = db_model.obtener_ventas_formulario(folio)
             self.ui.comboRut.setEnabled(False)
@@ -92,7 +92,7 @@ class FormVenta(QtGui.QDialog):
         folio,producto,precio,cantidad= self.obtener_datos() 
         
         try: 
-            db_model.editar_venta(folio,self.rut1,cantidad,precio)
+            db_model.editar_venta(int(folio),producto,int(cantidad),int(precio))
             # Invocar la función del modelo que permite editar 
             self.accepted.emit() 
             msgBox = QtGui.QMessageBox() 
