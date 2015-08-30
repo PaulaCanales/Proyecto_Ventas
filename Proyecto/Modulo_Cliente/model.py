@@ -56,6 +56,13 @@ def crear_cliente(rut, nombres, apellidos, correo=None):
     c.execute(sql, (rut, nombres, apellidos, correo))
     con.commit()
 
+def editar_cliente(rut,nombres,apellidos,correo): 
+    con=conectar() 
+    c = con.cursor() 
+    sql=( "UPDATE cliente SET nombres=?, apellidos=?,correo=? WHERE rut=?")
+    c.execute(sql, [nombres, apellidos,correo,rut]) 
+    con.commit()
+
 def borrar(rut):
     exito = False
     con = conectar()
@@ -71,9 +78,3 @@ def borrar(rut):
     con.close()
     return exito
 
-def editar_cliente(nombre,apellido,correo,rut): 
-	con=conectar() 
-	c = con.cursor() 
-	sql=( "UPDATE cliente SET nombre=?, apellido=?,correo=? WHERE rut=?") 
-	c.execute(sql, [nombre, apellido,correo]) 
-	con.commit()
