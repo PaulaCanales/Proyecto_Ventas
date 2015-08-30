@@ -3,7 +3,6 @@
 
 import sqlite3
 
-
 def conectar():
     con = sqlite3.connect('../SistemaVentas.db')
     con.row_factory = sqlite3.Row
@@ -29,7 +28,7 @@ def obtener_ventas_formulario(folio):
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM detalle WHERE venta_folio=?"
-    resultado = c.execute(query, (folio))
+    resultado = c.execute(query, [folio])
     ventas = resultado.fetchall()
     con.close()
     return ventas
@@ -108,7 +107,7 @@ def agregar_venta(folio, sku, cantidad, precio):
     c.execute(sql, (folio, sku, cantidad, precio, total))
     con.commit()
 
-def editar_venta(folio, rut, cantidad, precio):
+def editar_venta(folio, cliente_rut, cantidad, precio_unitario):
     """
     Se edita la tabla de detalle.
     """
@@ -116,8 +115,8 @@ def editar_venta(folio, rut, cantidad, precio):
     c = con.cursor()
     sql=(
         "UPDATE detalle SET cantidad=?, precio_unitario=?, total=? WHERE venta_folio=?, cliente_rut=? ")
-    total= precio*cantidad
-    c.execute(sql, [cantidad, precio, total, folio, rut])
+    total= precio_unitario*cantidad
+    c.execute(sql, [cantidad, precio_unitario, total, folio, cliente_rut])
     con.commit()
 
 def borrar(folio):

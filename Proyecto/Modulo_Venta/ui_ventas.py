@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ventas.ui'
 #
-# Created: Sun Aug 30 04:27:29 2015
+# Created: Sun Aug 30 06:20:11 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,12 +13,6 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(726, 579)
-        self.vender = QtGui.QPushButton(Form)
-        self.vender.setGeometry(QtCore.QRect(9, 543, 85, 27))
-        self.vender.setObjectName("vender")
-        self.eliminar = QtGui.QPushButton(Form)
-        self.eliminar.setGeometry(QtCore.QRect(340, 540, 85, 27))
-        self.eliminar.setObjectName("eliminar")
         self.layoutWidget = QtGui.QWidget(Form)
         self.layoutWidget.setGeometry(QtCore.QRect(475, 70, 208, 151))
         self.layoutWidget.setObjectName("layoutWidget")
@@ -73,18 +67,34 @@ class Ui_Form(object):
         self.grilla_prod.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.grilla_prod.setSortingEnabled(True)
         self.grilla_prod.setObjectName("grilla_prod")
+        self.widget = QtGui.QWidget(Form)
+        self.widget.setGeometry(QtCore.QRect(9, 540, 431, 29))
+        self.widget.setObjectName("widget")
+        self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.vender = QtGui.QPushButton(self.widget)
+        self.vender.setObjectName("vender")
+        self.horizontalLayout.addWidget(self.vender)
+        self.editar = QtGui.QPushButton(self.widget)
+        self.editar.setObjectName("editar")
+        self.horizontalLayout.addWidget(self.editar)
+        self.eliminar = QtGui.QPushButton(self.widget)
+        self.eliminar.setObjectName("eliminar")
+        self.horizontalLayout.addWidget(self.eliminar)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.vender.setText(QtGui.QApplication.translate("Form", "Vender", None, QtGui.QApplication.UnicodeUTF8))
-        self.eliminar.setText(QtGui.QApplication.translate("Form", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("Form", "BUSQUEDA", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "Fecha", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Form", "Proveedor", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Form", "Factura", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_3.setText(QtGui.QApplication.translate("Form", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("Form", "FILTRO", None, QtGui.QApplication.UnicodeUTF8))
+        self.vender.setText(QtGui.QApplication.translate("Form", "Vender", None, QtGui.QApplication.UnicodeUTF8))
+        self.editar.setText(QtGui.QApplication.translate("Form", "Editar", None, QtGui.QApplication.UnicodeUTF8))
+        self.eliminar.setText(QtGui.QApplication.translate("Form", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))
 
