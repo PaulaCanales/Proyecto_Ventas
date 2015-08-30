@@ -37,6 +37,15 @@ def obtener_TotalVenta(rut):
     nombre = resultado.fetchone()
     con.close()
     return nombre[0]
+    
+def detecta_Repetido(rut): # sirve para validar que no entre otro cliente con el mismo rut
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT COUNT(rut) FROM cliente WHERE rut = ?"
+    resultado = c.execute(query, [rut])
+    nombre = resultado.fetchone()
+    con.close()
+    return nombre[0]    
 
 def obtener_TotalIngreso(rut):
     con = conectar()

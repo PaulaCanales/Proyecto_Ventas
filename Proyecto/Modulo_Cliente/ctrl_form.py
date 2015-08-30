@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import sqlite3
 from PySide import QtGui
 from UI_Form_Cli import Ui_Form
 from Ui_Cliente import Ui_Cliente
@@ -46,9 +46,10 @@ class FormCliente(QtGui.QDialog):
             msgBox.exec_() 
             self.close() 
             print "Editar" 
-        except: 
-            #Tratar errores!!!!!! 
-            pass
+        except sqlite3.Error as e: 
+            msgBox = QtGui.QMessageBox()
+            msgBox.setText(u"Error!")
+            msgBox.exec_() 
 
     def obtener_datos(self):
         """
@@ -70,9 +71,14 @@ class FormCliente(QtGui.QDialog):
             msgBox.setText(u"El cliente ha sido creado.")
             msgBox.exec_()
             self.close()
-        except:
-            #Tratar errores!!!!!!
-            pass
+        except sqlite3.Error as e:
+            
+            msgBox = QtGui.QMessageBox()
+            msgBox.setText(u"Rut Existente!")
+            msgBox.exec_() 
+        
+        
+            
 
 	
 
