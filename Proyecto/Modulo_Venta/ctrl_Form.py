@@ -6,8 +6,8 @@ from ui_ventas import Ui_Form as ui_venta
 import model as db_model
 
 class FormVenta(QtGui.QDialog):
-
-    def __init__(self, parent=None, folio=None):
+    
+    def __init__(self, parent=None, folio=None,rut=None):
         """
         Formulario para crear y editar cliente.
         Si se recibe la var folio
@@ -16,14 +16,22 @@ class FormVenta(QtGui.QDialog):
         super(FormVenta, self).__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+
         if folio is None:
             self.ui.aceptar.clicked.connect(self.crear_venta)
             rut= db_model.obtener_rut()
             for dato in range(len(rut)):
                 self.ui.comboRut.addItem(str(rut[dato][0]))
         else:
+            
+            self.ui.comboRut.addItem(str(rut))
             detalle = db_model.obtener_ventas_formulario(folio)
             self.ui.comboRut.setEnabled(False)
+            self.ui.folio.setText(str(folio))
+            self.ui.folio.setEnabled(False)
+            self.ui.id_prod.setEnabled(False)
+            self.ui.cantidad.setEnabled(False)
+            self.ui.precio.setEnabled(False)
             #Creamos el modelo asociado a la tabla
             self.data = QtGui.QStandardItemModel(len(detalle), 4)
             self.data.setHorizontalHeaderItem(
@@ -61,18 +69,30 @@ class FormVenta(QtGui.QDialog):
             self.ui.grilla_prod.setColumnWidth(2, 210)
             self.ui.grilla_prod.setColumnWidth(3, 220)
 
-            self.ui.aceptar.clicked.connect(self.edita_venta)
+            self.ui.aceptar.clicked.connect(self.carga_venta)
+            
 
  
 
     def crear_venta(self):
         pass
 
+    def carga_venta(self):
+        
+        self.ui.cantidad.setEnabled(True)
+        self.ui.precio.setEnabled(True)
+        data = self.ui.grilla_prod.model()
+        index = self.ui.grilla_prod.currentIndex()
+        self.ui.id_prod.setText(str(data.index(index.row(), 0, QtCore.QModelIndex()).data()))
+        self.ui.cantidad.setText(str(data.index(index.row(), 1, QtCore.QModelIndex()).data()))
+        self.ui.precio.setText(str(data.index(index.row(), 2, QtCore.QModelIndex()).data()))
+        self.ui.venta.clicked.connect(self.edita_venta)
+
     def edita_venta(self): 
-        folio,producto.precio,cantidad= self.obtener_datos() 
+        folio,producto,precio,cantidad= self.obtener_datos() 
         
         try: 
-            model.editar_cliente(rut, nombres, apellidos, correo)
+            db_model.editar_venta(int(folio),producto,int(cantidad),int(precio))
             # Invocar la función del modelo que permite editar 
             self.accepted.emit() 
             msgBox = QtGui.QMessageBox() 
@@ -94,7 +114,7 @@ class FormVenta(QtGui.QDialog):
         producto = self.ui.id_prod.text()
         cantidad = self.ui.cantidad.text()
         precio = self.ui.precio.text()
-        return (folio,producto.precio,cantidad)
+        return (folio,producto,precio,cantidad)
             
 
 
