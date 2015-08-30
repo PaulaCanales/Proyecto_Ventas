@@ -181,7 +181,7 @@ class Main(QtGui.QWidget):
         producto = db_model.producto_sku(sku)
         lista.append(producto)
         #Creamos el modelo asociado a la tabla
-        self.data = QtGui.QStandardItemModel(len(producto), 8)
+        self.data = QtGui.QStandardItemModel(len(lista), 8)
         self.data.setHorizontalHeaderItem(
             0, QtGui.QStandardItem(u"ID"))
         self.data.setHorizontalHeaderItem(
@@ -242,7 +242,7 @@ class Main(QtGui.QWidget):
         producto = db_model.producto_nom(nom)
         lista.append(producto)
         #Creamos el modelo asociado a la tabla
-        self.data = QtGui.QStandardItemModel(len(producto), 8)
+        self.data = QtGui.QStandardItemModel(len(lista), 8)
         self.data.setHorizontalHeaderItem(
             0, QtGui.QStandardItem(u"ID"))
         self.data.setHorizontalHeaderItem(
