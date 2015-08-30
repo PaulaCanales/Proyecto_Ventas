@@ -21,6 +21,7 @@ class Main(QtGui.QWidget):
         self.filtrar()
         self.ui.combosku.activated[int].connect(self.onActivated_sku)
         self.ui.combonombre.activated[int].connect(self.onActivated_nombre)
+        self.signals()
         self.show()
 
     def connect_signals(self):
@@ -89,20 +90,16 @@ class Main(QtGui.QWidget):
 
         self.ui.grilla_prod.setModel(self.data)
 
-        # Para que las columnas 1 y 2 se estire o contraiga cuando
-        # se cambia el tamaño de la pantalla
-        self.ui.grilla_prod.horizontalHeader().setResizeMode(
-            1, self.ui.grilla_prod.horizontalHeader().Stretch)
-        self.ui.grilla_prod.horizontalHeader().setResizeMode(
-            2, self.ui.grilla_prod.horizontalHeader().Stretch)
-
+        
         self.ui.grilla_prod.setColumnWidth(0, 100)
-        self.ui.grilla_prod.setColumnWidth(1, 210)
-        self.ui.grilla_prod.setColumnWidth(2, 210)
-        self.ui.grilla_prod.setColumnWidth(3, 220)
-        self.ui.grilla_prod.setColumnWidth(4, 220)
-        self.ui.grilla_prod.setColumnWidth(5, 220)
-        self.ui.grilla_prod.setColumnWidth(6, 220)
+        self.ui.grilla_prod.setColumnWidth(1, 150)
+        self.ui.grilla_prod.setColumnWidth(2, 200)
+        self.ui.grilla_prod.setColumnWidth(3, 100)
+        self.ui.grilla_prod.setColumnWidth(4, 100)
+        self.ui.grilla_prod.setColumnWidth(5, 200)
+        self.ui.grilla_prod.setColumnWidth(6, 100)
+        self.ui.grilla_prod.setColumnWidth(7, 100)
+        self.ui.grilla_prod.setColumnWidth(8, 100)
 
     def elimina(self):
         """
@@ -151,6 +148,18 @@ class Main(QtGui.QWidget):
             self.ui.form = FormProducto(self, sku)
             self.ui.form.accepted.connect(self.load_data)
             self.ui.form.show()
+
+    def signals(self):
+        self.ui.grilla_prod.clicked.connect(self.show_poster)
+
+    def show_poster(self):
+        data = self.ui.grilla_prod.model()
+        index = self.ui.grilla_prod.currentIndex()
+        imagen = data.index(index.row(), 5, QtCore.QModelIndex()).data()
+        # Ahora la imagen
+        img = QtGui.QPixmap(str(imagen))
+        self.ui.img.setPixmap(img.scaled(100,100))
+
 
     def filtrar(self):
         """
@@ -216,20 +225,15 @@ class Main(QtGui.QWidget):
         	self.data.setData(index, cantidad_producto*row['Precio'])
         self.ui.grilla_prod.setModel(self.data)
 
-        # Para que las columnas 1 y 2 se estire o contraiga cuando
-        # se cambia el tamaño de la pantalla
-        self.ui.grilla_prod.horizontalHeader().setResizeMode(
-            1, self.ui.grilla_prod.horizontalHeader().Stretch)
-        self.ui.grilla_prod.horizontalHeader().setResizeMode(
-            2, self.ui.grilla_prod.horizontalHeader().Stretch)
-
         self.ui.grilla_prod.setColumnWidth(0, 100)
-        self.ui.grilla_prod.setColumnWidth(1, 210)
-        self.ui.grilla_prod.setColumnWidth(2, 210)
-        self.ui.grilla_prod.setColumnWidth(3, 220)
-        self.ui.grilla_prod.setColumnWidth(4, 220)
-        self.ui.grilla_prod.setColumnWidth(5, 220)
-        self.ui.grilla_prod.setColumnWidth(6, 220)
+        self.ui.grilla_prod.setColumnWidth(1, 150)
+        self.ui.grilla_prod.setColumnWidth(2, 200)
+        self.ui.grilla_prod.setColumnWidth(3, 100)
+        self.ui.grilla_prod.setColumnWidth(4, 100)
+        self.ui.grilla_prod.setColumnWidth(5, 200)
+        self.ui.grilla_prod.setColumnWidth(6, 100)
+        self.ui.grilla_prod.setColumnWidth(7, 100)
+        self.ui.grilla_prod.setColumnWidth(8, 100)
 
     def onActivated_nombre(self, index1):
 
@@ -284,21 +288,15 @@ class Main(QtGui.QWidget):
         	self.data.setData(index, cantidad_producto*row['Precio'])
         self.ui.grilla_prod.setModel(self.data)
 
-        # Para que las columnas 1 y 2 se estire o contraiga cuando
-        # se cambia el tamaño de la pantalla
-        self.ui.grilla_prod.horizontalHeader().setResizeMode(
-            1, self.ui.grilla_prod.horizontalHeader().Stretch)
-        self.ui.grilla_prod.horizontalHeader().setResizeMode(
-            2, self.ui.grilla_prod.horizontalHeader().Stretch)
-
         self.ui.grilla_prod.setColumnWidth(0, 100)
-        self.ui.grilla_prod.setColumnWidth(1, 210)
-        self.ui.grilla_prod.setColumnWidth(2, 210)
-        self.ui.grilla_prod.setColumnWidth(3, 220)
-        self.ui.grilla_prod.setColumnWidth(4, 220)
-        self.ui.grilla_prod.setColumnWidth(5, 220)
-        self.ui.grilla_prod.setColumnWidth(6, 220)
-
+        self.ui.grilla_prod.setColumnWidth(1, 150)
+        self.ui.grilla_prod.setColumnWidth(2, 200)
+        self.ui.grilla_prod.setColumnWidth(3, 100)
+        self.ui.grilla_prod.setColumnWidth(4, 100)
+        self.ui.grilla_prod.setColumnWidth(5, 200)
+        self.ui.grilla_prod.setColumnWidth(6, 100)
+        self.ui.grilla_prod.setColumnWidth(7, 100)
+        self.ui.grilla_prod.setColumnWidth(8, 100)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

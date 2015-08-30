@@ -6,70 +6,82 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>817</width>
-    <height>619</height>
+    <width>1200</width>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Productos</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Código</string>
-       </property>
-      </widget>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>BUSQUEDA</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="combosku">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
      </item>
-     <item row="3" column="0" colspan="2">
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Nombre</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
       <widget class="QPushButton" name="buscar">
        <property name="text">
-        <string>Buscar</string>
+        <string>Actualizar</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="combosku">
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QComboBox" name="combonombre">
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+     <item>
+      <widget class="QPushButton" name="agregar">
        <property name="text">
-        <string>Nombre</string>
+        <string>Agregar</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="0" colspan="2">
-      <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
+     <item>
+      <widget class="QPushButton" name="editar">
        <property name="text">
-        <string>BUSQUEDA</string>
+        <string>Editar</string>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="eliminar">
+       <property name="text">
+        <string>Eliminar</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-   <item row="1" column="0" rowspan="2" colspan="3">
+   <item row="4" column="0" colspan="4">
     <widget class="QTableView" name="grilla_prod">
      <property name="alternatingRowColors">
       <bool>true</bool>
@@ -85,51 +97,60 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QPushButton" name="agregar">
-       <property name="text">
-        <string>Agregar</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="editar">
-       <property name="text">
-        <string>Editar</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="eliminar">
-       <property name="text">
-        <string>Eliminar</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+   <item row="0" column="3" rowspan="4">
+    <widget class="QLabel" name="img">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
-   <item row="3" column="2">
-    <widget class="QWidget" name="imagen" native="true"/>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Código</string>
+     </property>
+    </widget>
    </item>
-   <item row="0" column="2">
+   <item row="2" column="1">
+    <widget class="QComboBox" name="combonombre">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="1">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -140,7 +161,22 @@
     </spacer>
    </item>
   </layout>
+  <zorder>combosku</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>combonombre</zorder>
+  <zorder>label</zorder>
+  <zorder>grilla_prod</zorder>
+  <zorder>img</zorder>
+  <zorder>horizontalSpacer</zorder>
  </widget>
+ <tabstops>
+  <tabstop>combosku</tabstop>
+  <tabstop>combonombre</tabstop>
+  <tabstop>editar</tabstop>
+  <tabstop>eliminar</tabstop>
+  <tabstop>grilla_prod</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
