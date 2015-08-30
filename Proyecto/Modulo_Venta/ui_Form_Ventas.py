@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Form_ventas.ui'
 #
-# Created: Sun Aug 30 01:26:30 2015
+# Created: Sun Aug 30 13:07:57 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,9 +18,11 @@ class Ui_Form(object):
         self.label = QtGui.QLabel(Form)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-        self.comboBox = QtGui.QComboBox(Form)
-        self.comboBox.setObjectName("comboBox")
-        self.gridLayout.addWidget(self.comboBox, 0, 1, 1, 1)
+        self.comboRut = QtGui.QComboBox(Form)
+        self.comboRut.setObjectName("comboRut")
+        self.comboRut.addItem("")
+        self.comboRut.setItemText(0, "")
+        self.gridLayout.addWidget(self.comboRut, 0, 1, 1, 1)
         self.pushButton = QtGui.QPushButton(Form)
         self.pushButton.setObjectName("pushButton")
         self.gridLayout.addWidget(self.pushButton, 0, 2, 1, 1)
@@ -51,9 +53,9 @@ class Ui_Form(object):
         self.folio = QtGui.QLineEdit(Form)
         self.folio.setObjectName("folio")
         self.gridLayout.addWidget(self.folio, 1, 1, 1, 1)
-        self.pushButton_2 = QtGui.QPushButton(Form)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 6, 1, 1, 1)
+        self.aceptar = QtGui.QPushButton(Form)
+        self.aceptar.setObjectName("aceptar")
+        self.gridLayout.addWidget(self.aceptar, 6, 1, 1, 1)
         self.grilla_prod = QtGui.QTableView(Form)
         self.grilla_prod.setAlternatingRowColors(True)
         self.grilla_prod.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
@@ -67,6 +69,14 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.comboRut, self.pushButton)
+        Form.setTabOrder(self.pushButton, self.folio)
+        Form.setTabOrder(self.folio, self.id_prod)
+        Form.setTabOrder(self.id_prod, self.precio)
+        Form.setTabOrder(self.precio, self.cantidad)
+        Form.setTabOrder(self.cantidad, self.grilla_prod)
+        Form.setTabOrder(self.grilla_prod, self.aceptar)
+        Form.setTabOrder(self.aceptar, self.venta)
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
@@ -77,6 +87,6 @@ class Ui_Form(object):
         self.label_4.setText(QtGui.QApplication.translate("Form", "Cantidad", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Form", "Detalle Informacion", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("Form", "Folio", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton_2.setText(QtGui.QApplication.translate("Form", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
+        self.aceptar.setText(QtGui.QApplication.translate("Form", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
         self.venta.setText(QtGui.QApplication.translate("Form", "Terminar Venta", None, QtGui.QApplication.UnicodeUTF8))
 

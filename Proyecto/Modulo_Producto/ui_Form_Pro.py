@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Form_Pro.ui'
 #
-# Created: Tue Aug 25 15:23:19 2015
+# Created: Sun Aug 30 12:37:48 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,6 +66,14 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.id, self.nombre)
+        Form.setTabOrder(self.nombre, self.marca)
+        Form.setTabOrder(self.marca, self.color)
+        Form.setTabOrder(self.color, self.imagen)
+        Form.setTabOrder(self.imagen, self.cargar)
+        Form.setTabOrder(self.cargar, self.precio)
+        Form.setTabOrder(self.precio, self.descripcion)
+        Form.setTabOrder(self.descripcion, self.agregar)
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Formulario", None, QtGui.QApplication.UnicodeUTF8))

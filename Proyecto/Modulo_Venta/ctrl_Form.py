@@ -18,8 +18,12 @@ class FormVenta(QtGui.QDialog):
         self.ui.setupUi(self)
         if folio is None:
             self.ui.aceptar.clicked.connect(self.crear_venta)
+            rut= db_model.obtener_rut()
+            for dato in range(len(rut)):
+                self.ui.comboRut.addItem(str(rut[dato][0]))
         else:
             detalle = db_model.obtener_ventas_formulario(folio)
+            self.ui.comboRut.setEnabled(False)
             #Creamos el modelo asociado a la tabla
             self.data = QtGui.QStandardItemModel(len(detalle), 4)
             self.data.setHorizontalHeaderItem(

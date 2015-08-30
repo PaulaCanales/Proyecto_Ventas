@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Clientes.ui'
 #
-# Created: Sun Aug 30 03:36:09 2015
+# Created: Sun Aug 30 12:36:02 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,15 +23,18 @@ class Ui_Cliente(object):
         self.table.setSortingEnabled(True)
         self.table.setObjectName("table")
         self.gridLayout.addWidget(self.table, 0, 0, 1, 1)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.pushButton = QtGui.QPushButton(Cliente)
         self.pushButton.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.pushButton, 1, 0, 1, 1)
+        self.horizontalLayout.addWidget(self.pushButton)
         self.pushButton_2 = QtGui.QPushButton(Cliente)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 1, 1, 1, 1)
+        self.horizontalLayout.addWidget(self.pushButton_2)
         self.pushButton_3 = QtGui.QPushButton(Cliente)
         self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout.addWidget(self.pushButton_3, 1, 2, 1, 1)
+        self.horizontalLayout.addWidget(self.pushButton_3)
+        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
 
         self.retranslateUi(Cliente)
         QtCore.QMetaObject.connectSlotsByName(Cliente)

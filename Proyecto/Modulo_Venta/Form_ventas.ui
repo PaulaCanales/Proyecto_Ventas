@@ -22,7 +22,13 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QComboBox" name="comboBox"/>
+    <widget class="QComboBox" name="comboRut">
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+    </widget>
    </item>
    <item row="0" column="2">
     <widget class="QPushButton" name="pushButton">
@@ -79,7 +85,7 @@
     <widget class="QLineEdit" name="folio"/>
    </item>
    <item row="6" column="1">
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="aceptar">
      <property name="text">
       <string>Agregar</string>
      </property>
@@ -110,6 +116,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboRut</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>folio</tabstop>
+  <tabstop>id_prod</tabstop>
+  <tabstop>precio</tabstop>
+  <tabstop>cantidad</tabstop>
+  <tabstop>grilla_prod</tabstop>
+  <tabstop>aceptar</tabstop>
+  <tabstop>venta</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

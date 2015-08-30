@@ -45,17 +45,29 @@ def obtener_folio():
     con.close()
     return ventas
 
-def obtener_sku():
+def obtener_producto():
     """
     Para combobox con productos. para filtro por producto
     """
     con = conectar()
     c = con.cursor()
-    query = "SELECT sku FROM producto "
+    query = "SELECT nombre FROM producto "
     resultado = c.execute(query)
     producto = resultado.fetchall()
     con.close()
-    return producto[0]
+    return producto
+
+def obtener_rut():
+    """
+    Para combobox con rut de clientes, en el formulario
+    """
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT rut FROM cliente "
+    resultado = c.execute(query)
+    cliente = resultado.fetchall()
+    con.close()
+    return cliente
 
 def venta_folio(sku):
     """

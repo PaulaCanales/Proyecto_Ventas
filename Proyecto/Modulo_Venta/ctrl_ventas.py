@@ -14,6 +14,7 @@ class Main(QtGui.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+        self.filtrar()
         self.load_data()
         self.connect_signals()
         self.show()
@@ -114,6 +115,18 @@ class Main(QtGui.QWidget):
             self.ui.form = FormVenta(self, folio)
             self.ui.form.accepted.connect(self.load_data)
             self.ui.form.show()
+
+    def filtrar(self):
+        """
+        Funcion que agrega todos los folios y productos al combobox
+        """
+        folio= db_model.obtener_folio()
+        for dato in range(len(folio)):
+            self.ui.comboFolio.addItem(str(folio[dato][0]))
+
+        productos= db_model.obtener_producto()
+        for dato in range(len(productos)):
+            self.ui.filtro.addItem(str(productos[dato][0]))
         
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

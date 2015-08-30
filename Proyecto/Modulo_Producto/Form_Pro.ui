@@ -100,6 +100,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>id</tabstop>
+  <tabstop>nombre</tabstop>
+  <tabstop>marca</tabstop>
+  <tabstop>color</tabstop>
+  <tabstop>imagen</tabstop>
+  <tabstop>cargar</tabstop>
+  <tabstop>precio</tabstop>
+  <tabstop>descripcion</tabstop>
+  <tabstop>agregar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
