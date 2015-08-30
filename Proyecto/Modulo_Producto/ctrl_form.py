@@ -3,6 +3,7 @@
 from PySide import QtGui
 from ui_Form_Pro import Ui_Form
 import model
+import os
 
 class FormProducto(QtGui.QDialog):
 
@@ -15,6 +16,7 @@ class FormProducto(QtGui.QDialog):
         super(FormProducto, self).__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.ui.cargar.clicked.connect(self.cargar_img)
         if sku is None:
             self.ui.agregar.clicked.connect(self.crear_producto)
         else:
@@ -46,9 +48,14 @@ class FormProducto(QtGui.QDialog):
         marca = self.ui.marca.text()
         color = self.ui.color.text()
         imagen = self.ui.imagen.text()
+        os.system("cp "+imagen+" imagenes")
+        ruta=[]
+        for i in imagen.split("/"):
+            ruta.append(i)
+        img="imagenes/"+ruta[len(ruta)-1]
         precio = int(self.ui.precio.text())
         descripcion = self.ui.descripcion.toPlainText()
-        return (sku, nombres, descripcion, marca, color, imagen, precio)
+        return (sku, nombres, descripcion, marca, color, img, precio)
 
     def crear_producto(self):
         sku, nombres, descripcion, marca, color, imagen, precio = self.obtener_datos()
@@ -75,3 +82,11 @@ class FormProducto(QtGui.QDialog):
         except:
             #Tratar errores!!!!!!
             pass
+
+    def cargar_img(self):
+        filename = QtGui.QFileDialog.getOpenFileName(
+            None, filter="Image Files (*.jpg *.png *.gif);;"
+                        "Todos los archivos (*.*)")
+        self.ui.imagen.setText(str(filename[0]))
+        
+    
