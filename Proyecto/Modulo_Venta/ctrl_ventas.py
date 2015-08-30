@@ -120,6 +120,10 @@ class Main(QtGui.QWidget):
         """
         Funcion que agrega todos los folios y productos al combobox
         """
+        rut= db_model.obtener_rut()
+        for dato in range(len(rut)):
+            self.ui.comboProv.addItem(str(rut[dato][0]))
+
         folio= db_model.obtener_folio()
         for dato in range(len(folio)):
             self.ui.comboFolio.addItem(str(folio[dato][0]))
