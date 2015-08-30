@@ -44,6 +44,18 @@ def obtener_folio():
     ventas = resultado.fetchall()
     con.close()
     return ventas
+    
+def filtrar_producto(sku):
+    """
+    Para combobox con productos, busqueda de ventas asociadas
+    """
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT folio, cliente_rut, fecha FROM detalle, venta WHERE producto_sku =? and venta_folio=folio"
+    resultado = c.execute(query, [sku])
+    ventas = resultado.fetchall()
+    con.close()
+    return ventas
 
 def obtener_producto():
     """
@@ -51,11 +63,13 @@ def obtener_producto():
     """
     con = conectar()
     c = con.cursor()
-    query = "SELECT nombre FROM producto "
+    query = "SELECT sku FROM producto "
     resultado = c.execute(query)
     producto = resultado.fetchall()
     con.close()
     return producto
+
+
 
 def obtener_rut():
     """
@@ -69,16 +83,29 @@ def obtener_rut():
     con.close()
     return cliente
 
-def venta_folio(sku):
+def obtener_cliente(cliente_rut):
+    """
+    Para combobox con rut de clientes, en el formulario
+    """
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM venta WHERE cliente_rut =?"
+    resultado = c.execute(query, [cliente_rut])
+    cliente = resultado.fetchall()
+    con.close()
+    return cliente
+
+def venta_folio(fol):
     """
     Para filtrar las ventas segun folio
     """
     con = conectar()
     c = con.cursor()
-    query = "SELECT * FROM venta WHERE folio = ?"
-    resultado = c.execute(query, [sku])
-    ventas = resultado.fetchone()
+    query = "SELECT * FROM venta WHERE folio =?"
+    resultado = c.execute(query, [int(fol)])
+    ventas = resultado.fetchall()
     con.close()
+
     return ventas
 
 def venta_fecha(nombre):

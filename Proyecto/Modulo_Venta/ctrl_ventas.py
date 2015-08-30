@@ -15,6 +15,9 @@ class Main(QtGui.QWidget):
         self.ui.setupUi(self)
 
         self.filtrar()
+        self.ui.comboProv.activated[int].connect(self.onActivated_cliente)
+        self.ui.filtro.activated[int].connect(self.onActivated_producto)
+        self.ui.comboFolio.activated[int].connect(self.onActivated_folio)
         self.load_data()
         self.connect_signals()
         self.show()
@@ -131,6 +134,133 @@ class Main(QtGui.QWidget):
         productos= db_model.obtener_producto()
         for dato in range(len(productos)):
             self.ui.filtro.addItem(str(productos[dato][0]))
+
+    def onActivated_cliente(self, index1):
+
+        cliente = self.ui.comboProv.itemText(index1)
+        client = db_model.obtener_cliente(cliente)
+        #Creamos el modelo asociado a la tabla
+        self.data = QtGui.QStandardItemModel(len(client), 4)
+        self.data.setHorizontalHeaderItem(
+            0, QtGui.QStandardItem(u"folio"))
+        self.data.setHorizontalHeaderItem(
+            1, QtGui.QStandardItem(u"cliente_rut"))
+        self.data.setHorizontalHeaderItem(
+            2, QtGui.QStandardItem(u"fecha"))
+        self.data.setHorizontalHeaderItem(
+            3, QtGui.QStandardItem(u"TotalVentas"))
+       
+
+        for r, row in enumerate(client):
+            index = self.data.index(r, 0, QtCore.QModelIndex())
+            self.data.setData(index, row['folio'])
+            index = self.data.index(r, 1, QtCore.QModelIndex())
+            self.data.setData(index, row['cliente_rut'])
+            index = self.data.index(r, 2, QtCore.QModelIndex())
+            self.data.setData(index, row['fecha'])
+            index = self.data.index(r, 3, QtCore.QModelIndex())
+            self.data.setData(index, db_model.obtener_total_Venta(row['folio']))
+            
+
+        self.ui.grilla_prod.setModel(self.data)
+
+        # Para que las columnas 1 y 2 se estire o contraiga cuando
+        # se cambia el tamaño de la pantalla
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            1, self.ui.grilla_prod.horizontalHeader().Stretch)
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            2, self.ui.grilla_prod.horizontalHeader().Stretch)
+
+        self.ui.grilla_prod.setColumnWidth(0, 100)
+        self.ui.grilla_prod.setColumnWidth(1, 210)
+        self.ui.grilla_prod.setColumnWidth(2, 210)
+        self.ui.grilla_prod.setColumnWidth(3, 220)
+
+    def onActivated_folio(self, index1):
+
+        folio = self.ui.comboFolio.itemText(index1)
+        ventas = db_model.venta_folio(folio)
+        
+        #Creamos el modelo asociado a la tabla
+        self.data = QtGui.QStandardItemModel(len(ventas), 4)
+        self.data.setHorizontalHeaderItem(
+            0, QtGui.QStandardItem(u"folio"))
+        self.data.setHorizontalHeaderItem(
+            1, QtGui.QStandardItem(u"cliente_rut"))
+        self.data.setHorizontalHeaderItem(
+            2, QtGui.QStandardItem(u"fecha"))
+        self.data.setHorizontalHeaderItem(
+            3, QtGui.QStandardItem(u"TotalVentas"))
+       
+
+        for r, row in enumerate(ventas):
+            index = self.data.index(r, 0, QtCore.QModelIndex())
+            self.data.setData(index, row['folio'])
+            index = self.data.index(r, 1, QtCore.QModelIndex())
+            self.data.setData(index, row['cliente_rut'])
+            index = self.data.index(r, 2, QtCore.QModelIndex())
+            self.data.setData(index, row['fecha'])
+            index = self.data.index(r, 3, QtCore.QModelIndex())
+            self.data.setData(index, db_model.obtener_total_Venta(row['folio']))
+            
+
+        self.ui.grilla_prod.setModel(self.data)
+
+        # Para que las columnas 1 y 2 se estire o contraiga cuando
+        # se cambia el tamaño de la pantalla
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            1, self.ui.grilla_prod.horizontalHeader().Stretch)
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            2, self.ui.grilla_prod.horizontalHeader().Stretch)
+
+        self.ui.grilla_prod.setColumnWidth(0, 100)
+        self.ui.grilla_prod.setColumnWidth(1, 210)
+        self.ui.grilla_prod.setColumnWidth(2, 210)
+        self.ui.grilla_prod.setColumnWidth(3, 220)
+    
+    def onActivated_producto(self, index1):
+
+        sku = self.ui.filtro.itemText(index1)
+        
+        ventas = db_model.filtrar_producto(sku)
+
+        
+        #Creamos el modelo asociado a la tabla
+        self.data = QtGui.QStandardItemModel(len(ventas), 4)
+        self.data.setHorizontalHeaderItem(
+            0, QtGui.QStandardItem(u"folio"))
+        self.data.setHorizontalHeaderItem(
+            1, QtGui.QStandardItem(u"cliente_rut"))
+        self.data.setHorizontalHeaderItem(
+            2, QtGui.QStandardItem(u"fecha"))
+        self.data.setHorizontalHeaderItem(
+            3, QtGui.QStandardItem(u"TotalVentas"))
+       
+
+        for r, row in enumerate(ventas):
+            index = self.data.index(r, 0, QtCore.QModelIndex())
+            self.data.setData(index, row['folio'])
+            index = self.data.index(r, 1, QtCore.QModelIndex())
+            self.data.setData(index, row['cliente_rut'])
+            index = self.data.index(r, 2, QtCore.QModelIndex())
+            self.data.setData(index, row['fecha'])
+            index = self.data.index(r, 3, QtCore.QModelIndex())
+            self.data.setData(index, db_model.obtener_total_Venta(row['folio']))
+            
+
+        self.ui.grilla_prod.setModel(self.data)
+
+        # Para que las columnas 1 y 2 se estire o contraiga cuando
+        # se cambia el tamaño de la pantalla
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            1, self.ui.grilla_prod.horizontalHeader().Stretch)
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            2, self.ui.grilla_prod.horizontalHeader().Stretch)
+
+        self.ui.grilla_prod.setColumnWidth(0, 100)
+        self.ui.grilla_prod.setColumnWidth(1, 210)
+        self.ui.grilla_prod.setColumnWidth(2, 210)
+        self.ui.grilla_prod.setColumnWidth(3, 220)
         
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
