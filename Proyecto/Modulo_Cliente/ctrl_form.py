@@ -20,7 +20,7 @@ class FormCliente(QtGui.QDialog):
             self.ui.aceptar.clicked.connect(self.crear_cliente)
         else:
             self.colocar_datos(rut)
-            self.ui.aceptar.clicked.connect(self.editar_cliente)
+            self.ui.aceptar.clicked.connect(self.edita_cliente)
 
     def colocar_datos(self, rut):
         """
@@ -32,6 +32,23 @@ class FormCliente(QtGui.QDialog):
         self.ui.nombre.setText(cliente["nombres"])
         self.ui.apellido.setText(cliente["apellidos"])
         self.ui.correo.setText(cliente["correo"])
+        self.ui.rut.setEnabled(False)
+
+    def edita_cliente(self): 
+        rut, nombres, apellidos, correo = self.obtener_datos() 
+        
+        try: 
+            model.editar_cliente(rut, nombres, apellidos, correo)
+            # Invocar la función del modelo que permite editar 
+            self.accepted.emit() 
+            msgBox = QtGui.QMessageBox() 
+            msgBox.setText(u"El cliente ha sido editado.") 
+            msgBox.exec_() 
+            self.close() 
+            print "Editar" 
+        except: 
+            #Tratar errores!!!!!! 
+            pass
 
     def obtener_datos(self):
         """
@@ -57,17 +74,5 @@ class FormCliente(QtGui.QDialog):
             #Tratar errores!!!!!!
             pass
 
-	def editar_cliente(self): 
-		rut, nombres, apellidos, correo = self.obtener_datos() 
-		try: 
-			model.editar_cliente(rut, nombres, apellidos, correo)
-			# Invocar la función del modelo que permite editar 
-			self.accepted.emit() 
-			msgBox = QtGui.QMessageBox() 
-			msgBox.setText(u"El cliente ha sido editado.") 
-			msgBox.exec_() 
-			self.close() 
-			print "Editar" 
-		except: 
-			#Tratar errores!!!!!! 
-			pass
+	
+

@@ -108,14 +108,15 @@ class Main(QtGui.QWidget):
         if index.row() == -1:  # No se ha seleccionado una fila
             self.errorMessageDialog = QtGui.QErrorMessage(self)
             self.errorMessageDialog.showMessage(u"Debe seleccionar una fila")
-            return False
+            return False    
         else:
             rut = data.index(index.row(), 0, QtCore.QModelIndex()).data()
             print rut
+            
             self.ui.form = FormCliente(self, rut)
             self.ui.form.accepted.connect(self.load_data)
             self.ui.form.show()
-
+            
 
 
 if __name__ == '__main__':
