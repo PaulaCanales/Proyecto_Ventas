@@ -84,6 +84,8 @@ class Main(QtGui.QWidget):
             self.data.setData(index, cantidad_producto)
             index = self.data.index(r, 8, QtCore.QModelIndex())
             self.data.setData(index, cantidad_producto*row['Precio'])
+            
+
 
         self.ui.grilla_prod.setModel(self.data)
 
@@ -118,17 +120,20 @@ class Main(QtGui.QWidget):
             return False
         else:
             sku = data.index(index.row(), 0, QtCore.QModelIndex()).data()
-            if (db_model.borrar(sku)):
-                self.load_data()
-                msgBox = QtGui.QMessageBox()
-                msgBox.setText(u"EL registro fue eliminado.")
-                msgBox.exec_()
-                return True
+            if (db_model.eliminar_revision(sku)):
+            	if (db_model.borrar(sku)):
+            		self.load_data()
+            		msgBox = QtGui.QMessageBox()
+            		msgBox.setText(u"El Registro fue eliminado.")
+            		msgBox.exec_()
+            		return True
             else:
-                self.ui.errorMessageDialog = QtGui.QErrorMessage(self)
-                self.ui.errorMessageDialog.showMessage(
-                    u"Error al eliminar el registro")
-                return False
+            	self.ui.errorMessageDialog= QtGui.QErrorMessage(self)
+            	self.ui.errorMessageDialog.showMessage(
+            		u"Error al Eliminar el Registro")
+            	return False
+
+
 
     def edita(self):
         """
@@ -207,6 +212,7 @@ class Main(QtGui.QWidget):
         	cantidad_producto= db_model.obtener_CantidadProducto(row['sku'])
         	self.data.setData(index, cantidad_producto)
         	index = self.data.index(r, 8, QtCore.QModelIndex())
+
         	self.data.setData(index, cantidad_producto*row['Precio'])
         self.ui.grilla_prod.setModel(self.data)
 
