@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Form_Cli.ui'
 #
-# Created: Tue Aug 25 12:38:04 2015
+# Created: Sun Aug 30 04:24:19 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,6 +19,7 @@ class Ui_Form(object):
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         self.rut = QtGui.QLineEdit(Form)
+        self.rut.setMaxLength(8)
         self.rut.setObjectName("rut")
         self.gridLayout.addWidget(self.rut, 0, 1, 1, 1)
         self.label_2 = QtGui.QLabel(Form)
@@ -37,6 +38,7 @@ class Ui_Form(object):
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 3, 0, 1, 1)
         self.correo = QtGui.QLineEdit(Form)
+        self.correo.setMaxLength(32766)
         self.correo.setObjectName("correo")
         self.gridLayout.addWidget(self.correo, 3, 1, 1, 1)
         self.aceptar = QtGui.QPushButton(Form)

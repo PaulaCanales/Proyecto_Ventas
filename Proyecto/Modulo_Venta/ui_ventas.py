@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ventas.ui'
 #
-# Created: Sun Aug 30 01:09:45 2015
+# Created: Sun Aug 30 04:27:29 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -67,6 +67,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.filtro)
         self.grilla_prod = QtGui.QTableView(Form)
         self.grilla_prod.setGeometry(QtCore.QRect(10, 20, 431, 511))
+        self.grilla_prod.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.grilla_prod.setAlternatingRowColors(True)
         self.grilla_prod.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.grilla_prod.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
