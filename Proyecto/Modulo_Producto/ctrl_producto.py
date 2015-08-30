@@ -40,7 +40,7 @@ class Main(QtGui.QWidget):
         """
         producto = db_model.obtener_producto()
         #Creamos el modelo asociado a la tabla
-        self.data = QtGui.QStandardItemModel(len(producto), 7)
+        self.data = QtGui.QStandardItemModel(len(producto), 8)
         self.data.setHorizontalHeaderItem(
             0, QtGui.QStandardItem(u"ID"))
         self.data.setHorizontalHeaderItem(
@@ -56,12 +56,14 @@ class Main(QtGui.QWidget):
         self.data.setHorizontalHeaderItem(
             6, QtGui.QStandardItem(u"Precio"))
         self.data.setHorizontalHeaderItem(
-            7, QtGui.QStandardItem(u"Total Ventas"))
-
+            7, QtGui.QStandardItem(u"Cantidad"))
+        self.data.setHorizontalHeaderItem(
+            8, QtGui.QStandardItem(u"Total"))
+        
+        cantidad_producto=0
 
         for r, row in enumerate(producto):
             index = self.data.index(r, 0, QtCore.QModelIndex())
-
             self.data.setData(index, row['sku'])
             index = self.data.index(r, 1, QtCore.QModelIndex())
             self.data.setData(index, row['nombre'])
@@ -76,7 +78,12 @@ class Main(QtGui.QWidget):
             index = self.data.index(r, 6, QtCore.QModelIndex())
             self.data.setData(index, row['Precio'])
             index = self.data.index(r, 7, QtCore.QModelIndex())
-            self.data.setData(index, db_model.obtener_TotalProducto(row['sku']))
+
+            cantidad_producto= db_model.obtener_CantidadProducto(row['sku'])
+            
+            self.data.setData(index, cantidad_producto)
+            index = self.data.index(r, 8, QtCore.QModelIndex())
+            self.data.setData(index, cantidad_producto*row['Precio'])
 
         self.ui.grilla_prod.setModel(self.data)
 
@@ -160,7 +167,7 @@ class Main(QtGui.QWidget):
         producto = db_model.producto_sku(sku)
         lista.append(producto)
         #Creamos el modelo asociado a la tabla
-        self.data = QtGui.QStandardItemModel(len(producto), 7)
+        self.data = QtGui.QStandardItemModel(len(producto), 8)
         self.data.setHorizontalHeaderItem(
             0, QtGui.QStandardItem(u"ID"))
         self.data.setHorizontalHeaderItem(
@@ -176,11 +183,12 @@ class Main(QtGui.QWidget):
         self.data.setHorizontalHeaderItem(
             6, QtGui.QStandardItem(u"Precio"))
         self.data.setHorizontalHeaderItem(
-            7, QtGui.QStandardItem(u"Total Ventas"))
+            7, QtGui.QStandardItem(u"Cantidad"))
+        self.data.setHorizontalHeaderItem(
+            8, QtGui.QStandardItem(u"Total"))
 
 
         for r, row in enumerate(lista):
-        	print r, row
         	index = self.data.index(r, 0, QtCore.QModelIndex())
         	self.data.setData(index, row['sku'])
         	index = self.data.index(r, 1, QtCore.QModelIndex())
@@ -196,8 +204,10 @@ class Main(QtGui.QWidget):
         	index = self.data.index(r, 6, QtCore.QModelIndex())
         	self.data.setData(index, row['Precio'])
         	index = self.data.index(r, 7, QtCore.QModelIndex())
-        	self.data.setData(index, db_model.obtener_TotalProducto(row['sku']))
-
+        	cantidad_producto= db_model.obtener_CantidadProducto(row['sku'])
+        	self.data.setData(index, cantidad_producto)
+        	index = self.data.index(r, 8, QtCore.QModelIndex())
+        	self.data.setData(index, cantidad_producto*row['Precio'])
         self.ui.grilla_prod.setModel(self.data)
 
         # Para que las columnas 1 y 2 se estire o contraiga cuando
@@ -222,7 +232,7 @@ class Main(QtGui.QWidget):
         producto = db_model.producto_nom(nom)
         lista.append(producto)
         #Creamos el modelo asociado a la tabla
-        self.data = QtGui.QStandardItemModel(len(producto), 7)
+        self.data = QtGui.QStandardItemModel(len(producto), 8)
         self.data.setHorizontalHeaderItem(
             0, QtGui.QStandardItem(u"ID"))
         self.data.setHorizontalHeaderItem(
@@ -238,11 +248,15 @@ class Main(QtGui.QWidget):
         self.data.setHorizontalHeaderItem(
             6, QtGui.QStandardItem(u"Precio"))
         self.data.setHorizontalHeaderItem(
-            7, QtGui.QStandardItem(u"Total Ventas"))
+            7, QtGui.QStandardItem(u"Cantidad"))
+        self.data.setHorizontalHeaderItem(
+            8, QtGui.QStandardItem(u"Total"))
+        
+        cantidad_producto=0
 
 
         for r, row in enumerate(lista):
-        	print r, row
+        	
         	index = self.data.index(r, 0, QtCore.QModelIndex())
         	self.data.setData(index, row['sku'])
         	index = self.data.index(r, 1, QtCore.QModelIndex())
@@ -258,8 +272,10 @@ class Main(QtGui.QWidget):
         	index = self.data.index(r, 6, QtCore.QModelIndex())
         	self.data.setData(index, row['Precio'])
         	index = self.data.index(r, 7, QtCore.QModelIndex())
-        	self.data.setData(index, db_model.obtener_TotalProducto(row['sku']))
-
+        	cantidad_producto= db_model.obtener_CantidadProducto(row['sku'])
+        	self.data.setData(index, cantidad_producto)
+        	index = self.data.index(r, 8, QtCore.QModelIndex())
+        	self.data.setData(index, cantidad_producto*row['Precio'])
         self.ui.grilla_prod.setModel(self.data)
 
         # Para que las columnas 1 y 2 se estire o contraiga cuando

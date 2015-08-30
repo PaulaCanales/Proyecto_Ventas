@@ -95,3 +95,12 @@ def obtener_TotalProducto(sku):
     producto = resultado.fetchone()
     con.close()
     return producto[0]
+
+def obtener_CantidadProducto(sku):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT SUM(cantidad) FROM detalle WHERE producto_sku = ?"
+    resultado = c.execute(query, [sku])
+    producto = resultado.fetchone()
+    con.close()
+    return producto[0]
