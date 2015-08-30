@@ -3,7 +3,7 @@
 import sys
 from PySide import QtGui, QtCore
 from ctrl_form import FormCliente
-from UI_Cliente import Ui_Cliente
+from Ui_Cliente import Ui_Cliente
 import model as db_model
 
 
@@ -92,18 +92,24 @@ class Main(QtGui.QWidget):
             reply = QtGui.QMessageBox.question(self, 'Message', quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
 
             if reply == QtGui.QMessageBox.Yes:
+                
                 rut = data.index(index.row(), 0, QtCore.QModelIndex()).data()
-                if (db_model.borrar(rut)):
-                    self.load_data()
-                    msgBox = QtGui.QMessageBox()
-                    msgBox.setText(u"EL registro fue eliminado.")
-                    msgBox.exec_()
-                    return True
+                if db_model.obtener_TotalVenta(rut)==0:
+                    if (db_model.borrar(rut)):
+                        self.load_data()
+                        msgBox = QtGui.QMessageBox()
+                        msgBox.setText(u"EL registro fue eliminado.")
+                        msgBox.exec_()
+                        return True
+                    else:
+                        self.ui.errorMessageDialog = QtGui.QErrorMessage(self)
+                        self.ui.errorMessageDialog.showMessage(
+                            u"Error al eliminar el registro")
+                        return False
                 else:
-                    self.ui.errorMessageDialog = QtGui.QErrorMessage(self)
-                    self.ui.errorMessageDialog.showMessage(
-                        u"Error al eliminar el registro")
-                    return False
+                        msgBox = QtGui.QMessageBox()
+                        msgBox.setText(u"Cliente posee ventas")
+                        msgBox.exec_()        
 
     def edit(self):
         

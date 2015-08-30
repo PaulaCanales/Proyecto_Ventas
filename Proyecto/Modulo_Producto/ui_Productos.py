@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Productos.ui'
 #
-# Created: Sun Aug 30 00:26:54 2015
+# Created: Sun Aug 30 03:43:03 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,6 +48,7 @@ class Ui_Productos(object):
         self.horizontalLayout.addWidget(self.eliminar)
         self.gridLayout.addLayout(self.horizontalLayout, 3, 0, 1, 2)
         self.grilla_prod = QtGui.QTableView(Productos)
+        self.grilla_prod.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.grilla_prod.setAlternatingRowColors(True)
         self.grilla_prod.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.grilla_prod.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)

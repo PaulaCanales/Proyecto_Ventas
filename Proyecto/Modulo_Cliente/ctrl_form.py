@@ -2,7 +2,7 @@
 
 from PySide import QtGui
 from UI_Form_Cli import Ui_Form
-from UI_Cliente import Ui_Cliente
+from Ui_Cliente import Ui_Cliente
 import model
 
 class FormCliente(QtGui.QDialog):
