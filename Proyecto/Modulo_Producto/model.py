@@ -87,6 +87,18 @@ def borrar(sku):
     con.close()
     return exito
 
+def eliminar_revision(sku):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT COUNT(producto_sku) FROM detalle WHERE producto_sku = ?"
+    resultado = c.execute(query, [sku])
+    prod_esta = resultado.fetchone()
+    con.close()
+    if prod_esta[0]==0:
+        return True #se puede eliminar
+    else:
+        return False #no se puede eliminar.
+
 def obtener_TotalProducto(sku):
     con = conectar()
     c = con.cursor()
@@ -103,4 +115,7 @@ def obtener_CantidadProducto(sku):
     resultado = c.execute(query, [sku])
     producto = resultado.fetchone()
     con.close()
-    return producto[0]
+    if producto[0]==None:
+        return 0
+    else: 
+        return producto[0]
