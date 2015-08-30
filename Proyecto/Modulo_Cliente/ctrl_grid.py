@@ -88,18 +88,22 @@ class Main(QtGui.QWidget):
             self.errorMessageDialog.showMessage(u"Debe seleccionar una fila")
             return False
         else:
-            rut = data.index(index.row(), 0, QtCore.QModelIndex()).data()
-            if (db_model.borrar(rut)):
-                self.load_data()
-                msgBox = QtGui.QMessageBox()
-                msgBox.setText(u"EL registro fue eliminado.")
-                msgBox.exec_()
-                return True
-            else:
-                self.ui.errorMessageDialog = QtGui.QErrorMessage(self)
-                self.ui.errorMessageDialog.showMessage(
-                    u"Error al eliminar el registro")
-                return False
+            quit_msg = "Are you sure you want to delete client?"
+            reply = QtGui.QMessageBox.question(self, 'Message', quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+
+            if reply == QtGui.QMessageBox.Yes:
+                rut = data.index(index.row(), 0, QtCore.QModelIndex()).data()
+                if (db_model.borrar(rut)):
+                    self.load_data()
+                    msgBox = QtGui.QMessageBox()
+                    msgBox.setText(u"EL registro fue eliminado.")
+                    msgBox.exec_()
+                    return True
+                else:
+                    self.ui.errorMessageDialog = QtGui.QErrorMessage(self)
+                    self.ui.errorMessageDialog.showMessage(
+                        u"Error al eliminar el registro")
+                    return False
 
     def edit(self):
         
