@@ -6,7 +6,7 @@ from ctrl_form import FormProducto
 from ui_Productos import Ui_Productos
 import model as db_model
 
-
+ 
 class Main_Pro(QtGui.QWidget):
     """
     Esta es una grilla y un buscador
@@ -24,6 +24,7 @@ class Main_Pro(QtGui.QWidget):
 
     def connect_signals(self):
         self.ui.agregar.clicked.connect(self.agrega)
+        self.ui.actualizar.clicked.connect(self.load_data)
         self.ui.eliminar.clicked.connect(self.elimina)
         self.ui.editar.clicked.connect(self.edita)
         self.ui.grilla_prod.clicked.connect(self.show_poster)

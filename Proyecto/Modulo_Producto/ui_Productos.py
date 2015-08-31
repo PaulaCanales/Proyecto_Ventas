@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Productos.ui'
 #
-# Created: Sun Aug 30 12:38:31 2015
+# Created: Mon Aug 31 08:59:26 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -34,9 +34,9 @@ class Ui_Productos(object):
         self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.buscar = QtGui.QPushButton(Productos)
-        self.buscar.setObjectName("buscar")
-        self.horizontalLayout.addWidget(self.buscar)
+        self.actualizar = QtGui.QPushButton(Productos)
+        self.actualizar.setObjectName("actualizar")
+        self.horizontalLayout.addWidget(self.actualizar)
         self.agregar = QtGui.QPushButton(Productos)
         self.agregar.setObjectName("agregar")
         self.horizontalLayout.addWidget(self.agregar)
@@ -87,7 +87,7 @@ class Ui_Productos(object):
         Productos.setWindowTitle(QtGui.QApplication.translate("Productos", "Productos", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Productos", "BUSQUEDA", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Productos", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
-        self.buscar.setText(QtGui.QApplication.translate("Productos", "Actualizar", None, QtGui.QApplication.UnicodeUTF8))
+        self.actualizar.setText(QtGui.QApplication.translate("Productos", "Borrar Filtro", None, QtGui.QApplication.UnicodeUTF8))
         self.agregar.setText(QtGui.QApplication.translate("Productos", "Agregar", None, QtGui.QApplication.UnicodeUTF8))
         self.editar.setText(QtGui.QApplication.translate("Productos", "Editar", None, QtGui.QApplication.UnicodeUTF8))
         self.eliminar.setText(QtGui.QApplication.translate("Productos", "Eliminar", None, QtGui.QApplication.UnicodeUTF8))

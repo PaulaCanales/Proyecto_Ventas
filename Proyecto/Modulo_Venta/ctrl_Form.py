@@ -66,17 +66,10 @@ class FormVenta(QtGui.QDialog):
 
             self.ui.grilla_prod.setModel(self.data)
 
-            # Para que las columnas 1 y 2 se estire o contraiga cuando
-            # se cambia el tamaño de la pantalla
-            self.ui.grilla_prod.horizontalHeader().setResizeMode(
-                1, self.ui.grilla_prod.horizontalHeader().Stretch)
-            self.ui.grilla_prod.horizontalHeader().setResizeMode(
-                2, self.ui.grilla_prod.horizontalHeader().Stretch)
-
             self.ui.grilla_prod.setColumnWidth(0, 100)
-            self.ui.grilla_prod.setColumnWidth(1, 210)
-            self.ui.grilla_prod.setColumnWidth(2, 210)
-            self.ui.grilla_prod.setColumnWidth(3, 220)
+            self.ui.grilla_prod.setColumnWidth(1, 100)
+            self.ui.grilla_prod.setColumnWidth(2, 100)
+            self.ui.grilla_prod.setColumnWidth(3, 100)
 
             self.ui.aceptar.clicked.connect(self.carga_venta)
             self.ui.guardar.clicked.connect(self.edita_venta)
