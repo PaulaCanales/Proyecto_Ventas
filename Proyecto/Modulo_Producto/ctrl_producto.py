@@ -23,19 +23,12 @@ class Main_Pro(QtGui.QWidget):
         self.show()
 
     def connect_signals(self):
-        """
-        Función para conectar las señales
-        """
         self.ui.agregar.clicked.connect(self.agrega)
         self.ui.eliminar.clicked.connect(self.elimina)
         self.ui.editar.clicked.connect(self.edita)
         self.ui.grilla_prod.clicked.connect(self.show_poster)
 
     def agrega(self):
-        """
-        Funcion que al agregar producto, actualiza la grilla
-        y muestra un mensaje
-        """
         self.ui.form = FormProducto(self)
         self.ui.form.accepted.connect(self.load_data)
         self.ui.form.show()
@@ -199,10 +192,7 @@ class Main_Pro(QtGui.QWidget):
 
 
     def onActivated_sku(self, index1):
-        """
-        Funcion que filtra la grilla con el sku
-        seleccionado en el combosku
-        """
+
         sku = self.ui.combosku.itemText(index1)
         if sku=="":
             self.load_data()
@@ -265,10 +255,7 @@ class Main_Pro(QtGui.QWidget):
             self.ui.grilla_prod.setColumnWidth(8, 100)
 
     def onActivated_nombre(self, index1):
-        """
-        Funcion que filtra la grilla con el nombre
-        seleccionado en el combonombre
-        """
+
         nom = self.ui.combonombre.itemText(index1)
         if nom=="":
             self.load_data()
@@ -277,7 +264,7 @@ class Main_Pro(QtGui.QWidget):
 	        producto = db_model.producto_nom(nom)
 	        lista.append(producto)
 	        #Creamos el modelo asociado a la tabla
-	        self.data = QtGui.QStandardItemModel(len(lista), 8)
+	        self.data = QtGui.QStandardItemModel(len(producto), 8)
 	        self.data.setHorizontalHeaderItem(
 	            0, QtGui.QStandardItem(u"ID"))
 	        self.data.setHorizontalHeaderItem(
@@ -300,7 +287,7 @@ class Main_Pro(QtGui.QWidget):
 	        cantidad_producto=0
 
 
-	        for r, row in enumerate(lista):
+	        for r, row in enumerate(producto):
 	        	
 	        	index = self.data.index(r, 0, QtCore.QModelIndex())
 	        	self.data.setData(index, row['sku'])
