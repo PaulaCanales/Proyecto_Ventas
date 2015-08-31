@@ -80,7 +80,10 @@ class FormVenta(QtGui.QDialog):
             self.ui.aceptar.clicked.connect(self.carga_venta)
             
 
-    def crear_venta(self):        
+    def crear_venta(self): 
+        """
+        Funcion que crea una venta
+        """       
         folio,producto,precio,cantidad=self.obtener_datos()
         try:
             
@@ -120,7 +123,7 @@ class FormVenta(QtGui.QDialog):
 
     def crear_venta2(self):
         """
-           aqui se deberia actualizar la grilla de ventas pero no u.u >:C 
+           Funcion que actualiza la grilla de ventas
         """
 
         rut=int(self.ui.comboRut.currentText ())
@@ -137,7 +140,9 @@ class FormVenta(QtGui.QDialog):
         
 
     def carga_venta(self):
-        
+        """
+        Funcion que carga una venta
+        """
         self.ui.cantidad.setEnabled(True)
         self.ui.precio.setEnabled(True)
         data = self.ui.grilla_prod.model()
@@ -148,6 +153,9 @@ class FormVenta(QtGui.QDialog):
         self.ui.venta.clicked.connect(self.edita_venta)
 
     def edita_venta(self): 
+        """
+        Funcion que edita una venta
+        """
         folio,producto,precio,cantidad= self.obtener_datos() 
         
         try: 
@@ -177,6 +185,10 @@ class FormVenta(QtGui.QDialog):
             
 
     def onActivated_idprod(self, index):
+        """
+        Funcion que al seleccionar un idprod (sku)
+        escribe automaticamente el precio correspondiente
+        """
         idprod = self.ui.id_prod.itemText(index)
         if idprod=="":
             self.ui.precio.setText("")

@@ -25,12 +25,19 @@ class Main_Ve(QtGui.QWidget):
         self.show()
 
     def connect_signals(self):
+        """
+        Funcion que conecta señales
+        """
         self.ui.vender.clicked.connect(self.add)
         self.ui.eliminar.clicked.connect(self.delete)
         self.ui.sinFiltro.clicked.connect(self.load_data)
         self.ui.editar.clicked.connect(self.editar)
 
-    def add(self):        
+    def add(self):
+        """
+        Funcion que al agregar producto, actualiza la grilla
+        y muestra un mensaje
+        """        
         self.ui.form = FormVenta(self)
         self.ui.form.accepted.connect(self.load_data)
         self.ui.form.show()
@@ -87,9 +94,9 @@ class Main_Ve(QtGui.QWidget):
         self.ui.grilla_prod.setColumnWidth(3, 220)
 
     def delete(self):        
-
-        # ANTES DE REALIZAR LA ACCIÓN SE DEBERÍA PREGUNTAR
-        # AL USUARIO CONFIRMAR LA OPERACIÓN !!!!!!!!!!!!!!
+        """
+        Elimina una venta
+        """
         data = self.ui.grilla_prod.model()
         index = self.ui.grilla_prod.currentIndex()
         if index.row() == -1:  # No se ha seleccionado una fila
@@ -117,6 +124,9 @@ class Main_Ve(QtGui.QWidget):
                   
 
     def editar(self):
+        """
+        Edita una venta
+        """
         data = self.ui.grilla_prod.model()
         index = self.ui.grilla_prod.currentIndex()
         if index.row() == -1:  # No se ha seleccionado una fila
@@ -193,7 +203,11 @@ class Main_Ve(QtGui.QWidget):
             self.ui.grilla_prod.setColumnWidth(1, 210)
             self.ui.grilla_prod.setColumnWidth(2, 210)
             self.ui.grilla_prod.setColumnWidth(3, 220)
+
     def onActivated_fecha(self, index1):
+        """
+        Al seleccionar una fecha, se filtra la grilla ventas
+        """
         
         fecha = self.ui.fecha.date()
         
@@ -238,8 +252,10 @@ class Main_Ve(QtGui.QWidget):
         self.ui.grilla_prod.setColumnWidth(3, 220)
 
     def onActivated_folio(self, index1):
-
-
+        """
+        Al seleccionar un folio en el comboFolio,
+        se filtra a grilla de ventas
+        """
         folio = self.ui.comboFolio.itemText(index1)
         if folio=="":
             self.load_data()
@@ -284,6 +300,10 @@ class Main_Ve(QtGui.QWidget):
             self.ui.grilla_prod.setColumnWidth(3, 220)
     
     def onActivated_producto(self, index1):
+        """
+        Al seleccionar un sku en filtro,
+        se filtra la grilla ventas
+        """
 
         sku = self.ui.filtro.itemText(index1)
         

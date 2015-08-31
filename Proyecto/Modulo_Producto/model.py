@@ -5,12 +5,19 @@ import sqlite3
 import os
 
 def conectar():
+    """
+    Se conecta a la base de datos
+    """
     con = sqlite3.connect('SistemaVentas.db')
     con.row_factory = sqlite3.Row
     return con
 
 
 def obtener_producto():
+    """
+    Obtener productos para desplegar en la 
+    grilla de productos
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM producto"
@@ -20,6 +27,9 @@ def obtener_producto():
     return producto
 
 def obtener_sku():
+    """
+    Obtener sku para desplegarlos en comboBox
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT sku FROM producto "
@@ -29,6 +39,9 @@ def obtener_sku():
     return producto
 
 def obtener_nombre():
+    """
+    Obtener nombre para desplegarlos en comboBox
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT nombre FROM producto "
@@ -38,6 +51,10 @@ def obtener_nombre():
     return producto
 
 def producto_sku(sku):
+    """
+    Obtener producto que se relaciona con un sku
+    para poder filtrar en la grilla de productos
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM producto WHERE sku = ?"
@@ -47,6 +64,10 @@ def producto_sku(sku):
     return producto
 
 def producto_nom(nombre):
+    """
+    Obtener producto que se relaciona con un nombre
+    para poder filtrar en la grilla de productos
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM producto WHERE nombre = ?"
@@ -56,6 +77,10 @@ def producto_nom(nombre):
     return producto
 
 def producto_img(sku):
+    """
+    Obtener imagen del producto que se relaciona con un sku
+    para poder mostrarla en la ventana
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT imagen FROM producto WHERE sku = ?"
@@ -65,6 +90,9 @@ def producto_img(sku):
     return producto[0]
 
 def crear_producto(sku, nombre, descripcion, marca, color, imagen, Precio):
+    """
+    Crea un producto
+    """
     con = conectar()
     c = con.cursor()
     sql = (
@@ -74,6 +102,9 @@ def crear_producto(sku, nombre, descripcion, marca, color, imagen, Precio):
     con.commit()
 
 def editar_producto(sku, nombre,descripcion,marca,color,imagen,Precio):
+    """
+    Edita un producto
+    """
     con=conectar()
     c = con.cursor()
     sql=(
@@ -82,6 +113,9 @@ def editar_producto(sku, nombre,descripcion,marca,color,imagen,Precio):
     con.commit()
 
 def borrar(sku):
+    """
+    Borra un producto
+    """
     img=producto_img(sku)
     os.system("rm "+img)
     exito = False
@@ -99,6 +133,10 @@ def borrar(sku):
     return exito
 
 def eliminar_revision(sku):
+    """
+    Se valida que se elimine un producto
+    que no tenga ventas asociadas
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT COUNT(producto_sku) FROM detalle WHERE producto_sku = ?"
@@ -120,6 +158,9 @@ def obtener_TotalProducto(sku):
     return producto[0]
 
 def obtener_CantidadProducto(sku):
+    """
+    Obtiene la cantidad de productos
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT SUM(cantidad) FROM detalle WHERE producto_sku = ?"

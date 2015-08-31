@@ -58,6 +58,10 @@ class FormProducto(QtGui.QDialog):
         return (sku, nombres, descripcion, marca, color, img, precio)
 
     def crear_producto(self):
+        """
+        Se crea un nuevo producto a partir
+        de la informacion obtenida en el formulario
+        """
         sku, nombres, descripcion, marca, color, imagen, precio = self.obtener_datos()
         try:
             model.crear_producto(sku, nombres, descripcion, marca, color, imagen, precio)
@@ -73,7 +77,9 @@ class FormProducto(QtGui.QDialog):
             
 
     def editar_producto(self):
-
+        """
+        Se edita un producto
+        """
         sku, nombres, descripcion, marca, color, imagen, precio = self.obtener_datos()
         try:
             model.editar_producto(sku, nombres, descripcion, marca, color, imagen, precio)# Invocar la función del modelo que permite editar

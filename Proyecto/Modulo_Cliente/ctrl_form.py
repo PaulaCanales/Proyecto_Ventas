@@ -35,6 +35,9 @@ class FormCliente(QtGui.QDialog):
         self.ui.rut.setEnabled(False)
 
     def edita_cliente(self): 
+        """
+        Edita los datos del cliente
+        """
         rut, nombres, apellidos, correo = self.obtener_datos() 
         
         try: 
@@ -63,6 +66,10 @@ class FormCliente(QtGui.QDialog):
         return (rut, nombres, apellidos, correo)
 
     def crear_cliente(self):
+        """
+        Se crea un nuevo cliente a partir de los datos
+        ingresados en el formulario 
+        """
         rut, nombres, apellidos, correo = self.obtener_datos()
         try:
             model.crear_cliente(rut, nombres, apellidos, correo)

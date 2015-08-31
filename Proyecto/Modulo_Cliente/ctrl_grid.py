@@ -82,7 +82,10 @@ class Main_Cli(QtGui.QWidget):
         self.ui.table.setColumnWidth(3, 220)
 
     def delete(self):
-        
+        """
+        Funcion que elimina un cliente, 
+        validando que no tenga ventas asociadas
+        """
         data = self.ui.table.model()
         index = self.ui.table.currentIndex()
         if index.row() == -1:  # No se ha seleccionado una fila

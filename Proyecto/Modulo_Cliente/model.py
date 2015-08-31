@@ -5,12 +5,19 @@ import sqlite3
 
 
 def conectar():
+    """
+    Se conecta a la base de datos
+    """
     con = sqlite3.connect('SistemaVentas.db')
     con.row_factory = sqlite3.Row
     return con
 
 
 def obtener_rut():
+   """
+    Obtener clientes para desplegar en la 
+    grilla de clientes
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM cliente"
@@ -21,6 +28,10 @@ def obtener_rut():
 
 
 def obtener_nombre(rut):
+    """
+    Obtener nombre asociado a rut para mostrar
+    en comboBox
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT * FROM cliente WHERE rut = ?"
@@ -30,6 +41,9 @@ def obtener_nombre(rut):
     return nombre
 
 def obtener_TotalVenta(rut):
+        """
+    Obtener el total de una venta
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT COUNT(cliente_rut) FROM venta WHERE cliente_rut = ?"
@@ -38,7 +52,10 @@ def obtener_TotalVenta(rut):
     con.close()
     return nombre[0]
     
-def detecta_Repetido(rut): # sirve para validar que no entre otro cliente con el mismo rut
+def detecta_Repetido(rut): 
+    """
+    sirve para validar que no entre otro cliente con el mismo rut
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT COUNT(rut) FROM cliente WHERE rut = ?"
@@ -48,6 +65,9 @@ def detecta_Repetido(rut): # sirve para validar que no entre otro cliente con el
     return nombre[0]    
 
 def obtener_TotalIngreso(rut):
+    """
+    Obtiene el total de ingresos
+    """
     con = conectar()
     c = con.cursor()
     query = "SELECT SUM(total) FROM cliente,detalle,venta WHERE rut = cliente_rut and folio=venta_folio and rut=?"
@@ -57,6 +77,9 @@ def obtener_TotalIngreso(rut):
     return nombre[0]
 
 def crear_cliente(rut, nombres, apellidos, correo=None):
+    """
+    Se crea un cliente
+    """
     con = conectar()
     c = con.cursor()
     sql = (
@@ -65,7 +88,10 @@ def crear_cliente(rut, nombres, apellidos, correo=None):
     c.execute(sql, (rut, nombres, apellidos, correo))
     con.commit()
 
-def editar_cliente(rut,nombres,apellidos,correo): 
+def editar_cliente(rut,nombres,apellidos,correo):
+    """
+    Se edita un cliente
+    """
     con=conectar() 
     c = con.cursor() 
     sql=( "UPDATE cliente SET nombres=?, apellidos=?,correo=? WHERE rut=?")
@@ -73,6 +99,9 @@ def editar_cliente(rut,nombres,apellidos,correo):
     con.commit()
 
 def borrar(rut):
+    """
+    Se borra un cliente
+    """
     exito = False
     con = conectar()
     c = con.cursor()
