@@ -8,6 +8,9 @@ import model as db_model
 
 
 class Main(QtGui.QWidget):
+    """
+    Controlador Principal Clientes
+    """
     
     def __init__(self):
         super(Main, self).__init__()
@@ -78,9 +81,6 @@ class Main(QtGui.QWidget):
 
     def delete(self):
         
-
-        # ANTES DE REALIZAR LA ACCIÓN SE DEBERÍA PREGUNTAR
-        # AL USUARIO CONFIRMAR LA OPERACIÓN !!!!!!!!!!!!!!
         data = self.ui.table.model()
         index = self.ui.table.currentIndex()
         if index.row() == -1:  # No se ha seleccionado una fila
@@ -88,7 +88,8 @@ class Main(QtGui.QWidget):
             self.errorMessageDialog.showMessage(u"Debe seleccionar una fila")
             return False
         else:
-            quit_msg = "Are you sure you want to delete client?"
+            #Confirmacion eliminar
+            quit_msg = "¿esta seguro que desea eliminar el cliente?"
             reply = QtGui.QMessageBox.question(self, 'Message', quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
 
             if reply == QtGui.QMessageBox.Yes:
@@ -112,6 +113,9 @@ class Main(QtGui.QWidget):
                         msgBox.exec_()        
 
     def edit(self):
+        """
+        Se abre el formulario de edicion.
+        """
         
         data = self.ui.table.model()
         index = self.ui.table.currentIndex()
