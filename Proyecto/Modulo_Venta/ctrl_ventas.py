@@ -5,7 +5,7 @@ from PySide import QtGui, QtCore
 from ctrl_Form import FormVenta
 from ui_ventas import Ui_Form
 import model as db_model
-
+import datetime 
 
 class Main(QtGui.QWidget):
     
@@ -18,6 +18,8 @@ class Main(QtGui.QWidget):
         self.ui.comboProv.activated[int].connect(self.onActivated_cliente)
         self.ui.filtro.activated[int].connect(self.onActivated_producto)
         self.ui.comboFolio.activated[int].connect(self.onActivated_folio)
+        ##self.ui.fecha.activated[int].connect(self.onActivated_fecha)
+        self.ui.fecha.dateChanged.connect(self.onActivated_fecha)
         self.load_data()
         self.connect_signals()
         self.show()
@@ -153,6 +155,49 @@ class Main(QtGui.QWidget):
        
 
         for r, row in enumerate(client):
+            index = self.data.index(r, 0, QtCore.QModelIndex())
+            self.data.setData(index, row['folio'])
+            index = self.data.index(r, 1, QtCore.QModelIndex())
+            self.data.setData(index, row['cliente_rut'])
+            index = self.data.index(r, 2, QtCore.QModelIndex())
+            self.data.setData(index, row['fecha'])
+            index = self.data.index(r, 3, QtCore.QModelIndex())
+            self.data.setData(index, db_model.obtener_total_Venta(row['folio']))
+            
+
+        self.ui.grilla_prod.setModel(self.data)
+
+        # Para que las columnas 1 y 2 se estire o contraiga cuando
+        # se cambia el tamaño de la pantalla
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            1, self.ui.grilla_prod.horizontalHeader().Stretch)
+        self.ui.grilla_prod.horizontalHeader().setResizeMode(
+            2, self.ui.grilla_prod.horizontalHeader().Stretch)
+
+        self.ui.grilla_prod.setColumnWidth(0, 100)
+        self.ui.grilla_prod.setColumnWidth(1, 210)
+        self.ui.grilla_prod.setColumnWidth(2, 210)
+        self.ui.grilla_prod.setColumnWidth(3, 220)
+    def onActivated_fecha(self, index1):
+        
+        fecha = self.ui.fecha.date()
+        
+        #print fecha.toPyDateTime()
+        index1=index1.toPython()    
+        ventas = db_model.filtrar_fecha(index1)
+        #Creamos el modelo asociado a la tabla
+        self.data = QtGui.QStandardItemModel(len(ventas), 4)
+        self.data.setHorizontalHeaderItem(
+            0, QtGui.QStandardItem(u"folio"))
+        self.data.setHorizontalHeaderItem(
+            1, QtGui.QStandardItem(u"cliente_rut"))
+        self.data.setHorizontalHeaderItem(
+            2, QtGui.QStandardItem(u"fecha"))
+        self.data.setHorizontalHeaderItem(
+            3, QtGui.QStandardItem(u"TotalVentas"))
+       
+
+        for r, row in enumerate(ventas):
             index = self.data.index(r, 0, QtCore.QModelIndex())
             self.data.setData(index, row['folio'])
             index = self.data.index(r, 1, QtCore.QModelIndex())

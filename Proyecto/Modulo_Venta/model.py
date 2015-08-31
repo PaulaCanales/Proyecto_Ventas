@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+import datetime
 import sqlite3
 
 def conectar():
@@ -94,7 +94,17 @@ def obtener_cliente(cliente_rut):
     cliente = resultado.fetchall()
     con.close()
     return cliente
-
+def filtrar_fecha(fecha):
+    """
+    Para combobox con fecha de ventas que filtra 
+    """
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM venta WHERE fecha =?"
+    resultado = c.execute(query, [fecha])
+    ventas = resultado.fetchall()
+    con.close()
+    return ventas
 def venta_folio(fol):
     """
     Para filtrar las ventas segun folio
