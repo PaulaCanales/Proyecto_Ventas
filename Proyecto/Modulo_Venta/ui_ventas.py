@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ventas.ui'
 #
-# Created: Mon Aug 31 01:33:36 2015
+# Created: Mon Aug 31 04:05:00 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(726, 579)
+        Form.resize(718, 572)
         self.layoutWidget = QtGui.QWidget(Form)
         self.layoutWidget.setGeometry(QtCore.QRect(460, 50, 261, 161))
         self.layoutWidget.setObjectName("layoutWidget")
@@ -103,7 +103,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.sinFiltro.setText(QtGui.QApplication.translate("Form", "Sin Filtro", None, QtGui.QApplication.UnicodeUTF8))
+        self.sinFiltro.setText(QtGui.QApplication.translate("Form", "Refrescar", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "Fecha", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Form", "Cliente", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Form", "Factura", None, QtGui.QApplication.UnicodeUTF8))
