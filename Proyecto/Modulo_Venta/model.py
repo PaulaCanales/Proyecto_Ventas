@@ -4,7 +4,7 @@ from datetime import date
 import sqlite3
 
 def conectar():
-    con = sqlite3.connect('../SistemaVentas.db')
+    con = sqlite3.connect('SistemaVentas.db')
     con.row_factory = sqlite3.Row
     return con
 

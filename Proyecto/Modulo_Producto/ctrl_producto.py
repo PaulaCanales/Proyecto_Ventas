@@ -7,12 +7,12 @@ from ui_Productos import Ui_Productos
 import model as db_model
 
 
-class Main(QtGui.QWidget):
+class Main_Pro(QtGui.QWidget):
     """
     Esta es una grilla y un buscador
     """
-    def __init__(self):
-        super(Main, self).__init__()
+    def __init__(self, parent=None):
+        super(Main_Pro, self).__init__(parent)
         self.ui = Ui_Productos()
         self.ui.setupUi(self)
 
@@ -322,5 +322,5 @@ class Main(QtGui.QWidget):
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    main = Main()
+    main = Main_Pro()
     sys.exit(app.exec_())

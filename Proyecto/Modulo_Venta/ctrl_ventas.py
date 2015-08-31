@@ -7,10 +7,10 @@ from ui_ventas import Ui_Form
 import model as db_model
 import datetime 
 
-class Main(QtGui.QWidget):
+class Main_Ve(QtGui.QWidget):
     
-    def __init__(self):
-        super(Main, self).__init__()
+    def __init__(self, parent=None):
+        super(Main_Ve, self).__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
@@ -332,5 +332,5 @@ class Main(QtGui.QWidget):
         
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    main = Main()
+    main = Main_Ve()
     sys.exit(app.exec_())

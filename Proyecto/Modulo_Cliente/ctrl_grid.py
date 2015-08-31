@@ -7,10 +7,10 @@ from Ui_Cliente import Ui_Cliente
 import model as db_model
 
 
-class Main(QtGui.QWidget):
+class Main_Cli(QtGui.QWidget):
     
-    def __init__(self):
-        super(Main, self).__init__()
+    def __init__(self, parent=None):
+        super(Main_Cli, self).__init__(parent)
         self.ui = Ui_Cliente()
         self.ui.setupUi(self)
 
@@ -131,5 +131,5 @@ class Main(QtGui.QWidget):
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    main = Main()
+    main = Main_Cli()
     sys.exit(app.exec_())
