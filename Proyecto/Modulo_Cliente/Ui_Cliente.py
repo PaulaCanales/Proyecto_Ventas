@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Clientes.ui'
 #
-# Created: Sun Aug 30 12:36:02 2015
+# Created: Mon Aug 31 03:03:58 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_Cliente(object):
     def setupUi(self, Cliente):
         Cliente.setObjectName("Cliente")
-        Cliente.resize(762, 462)
+        Cliente.resize(1200, 713)
         self.gridLayout = QtGui.QGridLayout(Cliente)
         self.gridLayout.setObjectName("gridLayout")
         self.table = QtGui.QTableView(Cliente)
