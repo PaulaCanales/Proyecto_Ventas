@@ -16,6 +16,7 @@ class FormVenta(QtGui.QDialog):
         super(FormVenta, self).__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.ui.id_prod.activated[int].connect(self.onActivated_idprod)
 
         if folio is None:
             
@@ -24,6 +25,9 @@ class FormVenta(QtGui.QDialog):
             rut= db_model.obtener_rut()
             for dato in range(len(rut)):
                 self.ui.comboRut.addItem(str(rut[dato][0]))
+            idprod= db_model.obtener_idprod()
+            for dato in range(len(idprod)):
+                self.ui.id_prod.addItem(str(idprod[dato][0]))
         else:
             
             self.ui.comboRut.addItem(str(rut))
@@ -164,12 +168,7 @@ class FormVenta(QtGui.QDialog):
         return (int(folio),producto,int(precio),int(cantidad))
             
 
-            
-
-
-        
-        
-            
-
-	
-
+    def onActivated_idprod(self, index):
+        idprod = self.ui.id_prod.itemText(index)
+        precio = db_model.obtener_precio(idprod)
+        self.ui.precio.setText(str(precio))

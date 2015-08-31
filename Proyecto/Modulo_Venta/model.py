@@ -69,8 +69,6 @@ def obtener_producto():
     con.close()
     return producto
 
-
-
 def obtener_rut():
     """
     Para combobox con rut de clientes, en el formulario
@@ -83,6 +81,18 @@ def obtener_rut():
     con.close()
     return cliente
 
+def obtener_idprod():
+    """
+    Para combobox con rut de clientes, en el formulario
+    """
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT sku FROM producto "
+    resultado = c.execute(query)
+    producto = resultado.fetchall()
+    con.close()
+    return producto
+
 def obtener_cliente(cliente_rut):
     """
     Para combobox con rut de clientes, en el formulario
@@ -94,6 +104,16 @@ def obtener_cliente(cliente_rut):
     cliente = resultado.fetchall()
     con.close()
     return cliente
+
+def obtener_precio(sku):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT Precio FROM producto WHERE sku = ?"
+    resultado = c.execute(query, [sku])
+    producto = resultado.fetchone()
+    con.close()
+    return producto[0]
+
 def filtrar_fecha(fecha):
     """
     Para combobox con fecha de ventas que filtra 
@@ -105,6 +125,7 @@ def filtrar_fecha(fecha):
     ventas = resultado.fetchall()
     con.close()
     return ventas
+
 def venta_folio(fol):
     """
     Para filtrar las ventas segun folio
@@ -115,7 +136,6 @@ def venta_folio(fol):
     resultado = c.execute(query, [int(fol)])
     ventas = resultado.fetchall()
     con.close()
-
     return ventas
 
 def venta_fecha(nombre):

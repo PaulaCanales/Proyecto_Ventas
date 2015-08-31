@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Form_ventas.ui'
 #
-# Created: Sun Aug 30 21:41:21 2015
+# Created: Sun Aug 30 22:28:31 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,9 +26,6 @@ class Ui_Form(object):
         self.label_5 = QtGui.QLabel(Form)
         self.label_5.setObjectName("label_5")
         self.gridLayout.addWidget(self.label_5, 2, 0, 1, 1)
-        self.id_prod = QtGui.QLineEdit(Form)
-        self.id_prod.setObjectName("id_prod")
-        self.gridLayout.addWidget(self.id_prod, 2, 1, 1, 1)
         self.label_2 = QtGui.QLabel(Form)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 3, 0, 1, 1)
@@ -64,12 +61,16 @@ class Ui_Form(object):
         self.venta = QtGui.QPushButton(Form)
         self.venta.setObjectName("venta")
         self.gridLayout.addWidget(self.venta, 7, 1, 1, 1)
+        self.id_prod = QtGui.QComboBox(Form)
+        self.id_prod.setObjectName("id_prod")
+        self.id_prod.addItem("")
+        self.id_prod.setItemText(0, "")
+        self.gridLayout.addWidget(self.id_prod, 2, 1, 1, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.comboRut, self.folio)
-        Form.setTabOrder(self.folio, self.id_prod)
-        Form.setTabOrder(self.id_prod, self.precio)
+        Form.setTabOrder(self.folio, self.precio)
         Form.setTabOrder(self.precio, self.cantidad)
         Form.setTabOrder(self.cantidad, self.grilla_prod)
         Form.setTabOrder(self.grilla_prod, self.aceptar)
