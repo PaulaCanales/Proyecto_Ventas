@@ -6,49 +6,51 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>264</width>
-    <height>469</height>
+    <width>1011</width>
+    <height>713</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Menu</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="productos">
-      <property name="text">
-       <string>Productos</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="clientes">
-      <property name="text">
-       <string>Clientes</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="ventas">
-      <property name="text">
-       <string>Ventas</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <layout class="QVBoxLayout" name="verticalLayout"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>264</width>
+     <width>1011</width>
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuModulos">
+    <property name="title">
+     <string>Modulos</string>
+    </property>
+    <addaction name="actionClientes"/>
+    <addaction name="actionProductos"/>
+    <addaction name="actionVentas"/>
+   </widget>
+   <addaction name="menuModulos"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionClientes">
+   <property name="text">
+    <string>Clientes</string>
+   </property>
+  </action>
+  <action name="actionProductos">
+   <property name="text">
+    <string>Productos</string>
+   </property>
+  </action>
+  <action name="actionVentas">
+   <property name="text">
+    <string>Ventas</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

@@ -19,7 +19,8 @@ class FormVenta(QtGui.QDialog):
         self.ui.id_prod.activated[int].connect(self.onActivated_idprod)
 
         if folio is None:
-            
+            self.ui.aceptar.setText("Agregar")
+            self.ui.venta.setText("Terminar Venta")
             self.ui.aceptar.clicked.connect(self.crear_venta)
             self.ui.venta.clicked.connect(self.crear_venta2)
             rut= db_model.obtener_rut()
@@ -29,8 +30,10 @@ class FormVenta(QtGui.QDialog):
             for dato in range(len(idprod)):
                 self.ui.id_prod.addItem(str(idprod[dato][0]))
         else:
+            self.ui.aceptar.setText("Editar Producto")
+            self.ui.venta.setText("Terminar")
+
             
-            self.ui.comboRut.addItem(str(rut))
             detalle = db_model.obtener_ventas_formulario(folio)
             self.ui.comboRut.setEnabled(False)
             self.ui.folio.setText(str(folio))
@@ -112,10 +115,14 @@ class FormVenta(QtGui.QDialog):
             
         except sqlite3.Error as e: 
             msgBox = QtGui.QMessageBox()
-            msgBox.setText(u"Error !")
+            msgBox.setText(u"Error, revise los datos!")
             msgBox.exec_() 
 
     def crear_venta2(self):
+        """
+           aqui se deberia actualizar la grilla de ventas pero no u.u >:C 
+        """
+
         rut=int(self.ui.comboRut.currentText ())
         folio = self.ui.folio.text()
         try:
@@ -124,7 +131,7 @@ class FormVenta(QtGui.QDialog):
 
         except sqlite3.Error as e: 
             msgBox = QtGui.QMessageBox()
-            msgBox.setText(u"Error !")
+            msgBox.setText(u"Error, revise los datos!")
             msgBox.exec_() 
         
 
@@ -134,7 +141,7 @@ class FormVenta(QtGui.QDialog):
         self.ui.precio.setEnabled(True)
         data = self.ui.grilla_prod.model()
         index = self.ui.grilla_prod.currentIndex()
-        self.ui.id_prod.setText(str(data.index(index.row(), 0, QtCore.QModelIndex()).data()))
+      
         self.ui.cantidad.setText(str(data.index(index.row(), 1, QtCore.QModelIndex()).data()))
         self.ui.precio.setText(str(data.index(index.row(), 2, QtCore.QModelIndex()).data()))
         self.ui.venta.clicked.connect(self.edita_venta)
@@ -153,7 +160,7 @@ class FormVenta(QtGui.QDialog):
             print "Editar" 
         except sqlite3.Error as e: 
             msgBox = QtGui.QMessageBox()
-            msgBox.setText(u"Error!")
+            msgBox.setText(u"Error, revise los datos!")
             msgBox.exec_() 
 
     def obtener_datos(self):
@@ -162,7 +169,7 @@ class FormVenta(QtGui.QDialog):
         en el formulario
         """
         folio = self.ui.folio.text()
-        producto = self.ui.id_prod.text()
+        producto = self.ui.id_prod.currentText()
         cantidad = self.ui.cantidad.text()
         precio = self.ui.precio.text()
         return (int(folio),producto,int(precio),int(cantidad))
