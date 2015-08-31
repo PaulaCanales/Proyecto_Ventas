@@ -170,5 +170,8 @@ class FormVenta(QtGui.QDialog):
 
     def onActivated_idprod(self, index):
         idprod = self.ui.id_prod.itemText(index)
-        precio = db_model.obtener_precio(idprod)
-        self.ui.precio.setText(str(precio))
+        if idprod=="":
+            self.ui.precio.setText("")
+        else:
+            precio = db_model.obtener_precio(idprod)
+            self.ui.precio.setText(str(precio))
