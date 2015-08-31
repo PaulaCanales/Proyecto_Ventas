@@ -67,8 +67,10 @@ class FormProducto(QtGui.QDialog):
             msgBox.exec_()
             self.close()
         except:
-            #Tratar errores!!!!!!
-            pass
+            self.ui.errorMessageDialog= QtGui.QErrorMessage(self)
+            self.ui.errorMessageDialog.showMessage(
+                u"Error al crear el producto")
+            
 
     def editar_producto(self):
 
@@ -81,8 +83,10 @@ class FormProducto(QtGui.QDialog):
             msgBox.exec_()
             self.close()
         except:
-            #Tratar errores!!!!!!
-            pass
+            self.ui.errorMessageDialog= QtGui.QErrorMessage(self)
+            self.ui.errorMessageDialog.showMessage(
+                u"Error al editar el producto")
+            
 
     def cargar_img(self):
         filename = QtGui.QFileDialog.getOpenFileName(
