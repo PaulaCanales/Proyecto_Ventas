@@ -127,6 +127,7 @@ class FormVenta(QtGui.QDialog):
         folio = self.ui.folio.text()
         try:
             db_model.crear_venta(int(folio), rut)
+            self.accepted.emit()
             self.close()
 
         except sqlite3.Error as e: 
