@@ -28,6 +28,7 @@ class Login(QtGui.QMainWindow):
         nombre = self.ui.Usuario.text()
         contrasena = self.ui.contrasena.text()
         if (name==nombre and pas==contrasena):
+            self.close()
             widget = Main(self)
             self.setCentralWidget(widget)
             return True
