@@ -14,7 +14,7 @@ def conectar():
 
 
 def obtener_rut():
-   """
+    """
     Obtener clientes para desplegar en la 
     grilla de clientes
     """
@@ -41,7 +41,7 @@ def obtener_nombre(rut):
     return nombre
 
 def obtener_TotalVenta(rut):
-        """
+    """
     Obtener el total de una venta
     """
     con = conectar()
