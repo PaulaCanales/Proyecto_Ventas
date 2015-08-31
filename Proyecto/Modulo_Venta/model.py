@@ -139,7 +139,7 @@ def crear_venta(folio, rut):
     sql = (
         "INSERT INTO venta (folio,cliente_rut, fecha)"
         "VALUES (?,?,?)")
-    fecha= today.date()
+    fecha= date.today()
     c.execute(sql, (folio, rut, fecha))
     con.commit()
 
@@ -150,9 +150,8 @@ def agregar_venta(folio, sku, cantidad, precio):
     con = conectar()
     c = con.cursor()
     sql = (
-        "INSERT INTO detalle (venta_folio, producto_sku, cantidad, precio_unitario, total)"
-        "VALUES (?,?,?,?,?)")
-    total=cantidad*precio_unitario
+        "INSERT INTO detalle (venta_folio, producto_sku, cantidad, precio_unitario, total) VALUES (?,?,?,?,?)")
+    total=cantidad*precio
     c.execute(sql, (folio, sku, cantidad, precio, total))
     con.commit()
 

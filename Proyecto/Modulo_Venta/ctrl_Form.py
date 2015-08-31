@@ -18,6 +18,7 @@ class FormVenta(QtGui.QDialog):
         self.ui.setupUi(self)
 
         if folio is None:
+            self.ui.pushButton.clicked.connect(self.crear_cliente)
             self.ui.aceptar.clicked.connect(self.crear_venta)
             rut= db_model.obtener_rut()
             for dato in range(len(rut)):
@@ -52,8 +53,7 @@ class FormVenta(QtGui.QDialog):
                 index = self.data.index(r, 2, QtCore.QModelIndex())
                 self.data.setData(index, row['precio_unitario'])
                 index = self.data.index(r, 3, QtCore.QModelIndex())
-                self.data.setData(index, row['total'])
-                
+                self.data.setData(index, row['total'])                
 
             self.ui.grilla_prod.setModel(self.data)
 
@@ -72,9 +72,49 @@ class FormVenta(QtGui.QDialog):
             self.ui.aceptar.clicked.connect(self.carga_venta)
             
 
- 
+    def crear_venta(self):        
+        folio,producto,precio,cantidad=self.obtener_datos()
+        try:
+            
+            db_model.agregar_venta(folio, producto, cantidad, precio)
+            detalle = db_model.obtener_ventas_formulario(folio)
+            self.ui.comboRut.setEnabled(False)
+            self.ui.folio.setText(str(folio))
+            self.ui.folio.setEnabled(False)
+            
+            #Creamos el modelo asociado a la tabla
+            self.data = QtGui.QStandardItemModel(len(detalle), 4)
+            self.data.setHorizontalHeaderItem(
+                0, QtGui.QStandardItem(u"producto"))
+            self.data.setHorizontalHeaderItem(
+                1, QtGui.QStandardItem(u"cantidad"))
+            self.data.setHorizontalHeaderItem(
+                2, QtGui.QStandardItem(u"precio unitario"))
+            self.data.setHorizontalHeaderItem(
+                3, QtGui.QStandardItem(u"Total"))           
 
-    def crear_venta(self):
+            for r, row in enumerate(detalle):
+                index = self.data.index(r, 0, QtCore.QModelIndex())
+                self.data.setData(index, row['producto_sku'])
+                index = self.data.index(r, 1, QtCore.QModelIndex())
+                self.data.setData(index, row['cantidad'])
+                index = self.data.index(r, 2, QtCore.QModelIndex())
+                self.data.setData(index, row['precio_unitario'])
+                index = self.data.index(r, 3, QtCore.QModelIndex())
+                self.data.setData(index, row['total'])               
+
+            self.ui.grilla_prod.setModel(self.data)
+            
+        except sqlite3.Error as e: 
+            msgBox = QtGui.QMessageBox()
+            msgBox.setText(u"Error !")
+            msgBox.exec_() 
+
+    def crear_venta2(self):
+        pass
+        
+
+    def crear_cliente(self):
         pass
 
     def carga_venta(self):
@@ -92,7 +132,7 @@ class FormVenta(QtGui.QDialog):
         folio,producto,precio,cantidad= self.obtener_datos() 
         
         try: 
-            db_model.editar_venta(int(folio),producto,int(cantidad),int(precio))
+            db_model.editar_venta(folio,producto,cantidad,precio)
             # Invocar la función del modelo que permite editar 
             self.accepted.emit() 
             msgBox = QtGui.QMessageBox() 
@@ -114,7 +154,9 @@ class FormVenta(QtGui.QDialog):
         producto = self.ui.id_prod.text()
         cantidad = self.ui.cantidad.text()
         precio = self.ui.precio.text()
-        return (folio,producto,precio,cantidad)
+        return (int(folio),producto,int(precio),int(cantidad))
+            
+
             
 
 
