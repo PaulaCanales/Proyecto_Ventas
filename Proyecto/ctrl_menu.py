@@ -19,7 +19,7 @@ class Main(QtGui.QMainWindow):
         # Cargamos las acciones al presionar el menú
         self.menu_actions()
         img = QtGui.QPixmap("imagenes/banner.png")
-        self.ui.banner.setPixmap(img)
+        self.ui.banner.setPixmap(img.scaled(1182,634))
         self.show()
 
     def menu_actions(self):
