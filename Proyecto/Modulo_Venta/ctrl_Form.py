@@ -6,7 +6,7 @@ from ui_ventas import Ui_Form as ui_venta
 import model as db_model
 
 class FormVenta(QtGui.QDialog):
-    
+    fila=0
     def __init__(self, parent=None, folio=None,rut=None):
         """
         Formulario para crear y editar cliente.
@@ -21,6 +21,7 @@ class FormVenta(QtGui.QDialog):
         if folio is None:
             self.ui.aceptar.setText("Agregar")
             self.ui.venta.setText("Terminar Venta")
+            self.ui.guardar.setEnabled(False)
             self.ui.aceptar.clicked.connect(self.crear_venta)
             self.ui.venta.clicked.connect(self.crear_venta2)
             rut= db_model.obtener_rut()
@@ -32,7 +33,7 @@ class FormVenta(QtGui.QDialog):
         else:
             self.ui.aceptar.setText("Editar Producto")
             self.ui.venta.setText("Terminar")
-
+            
             
             detalle = db_model.obtener_ventas_formulario(folio)
             self.ui.comboRut.setEnabled(False)
@@ -78,7 +79,11 @@ class FormVenta(QtGui.QDialog):
             self.ui.grilla_prod.setColumnWidth(3, 220)
 
             self.ui.aceptar.clicked.connect(self.carga_venta)
+            self.ui.guardar.clicked.connect(self.edita_venta)
+            self.ui.venta.clicked.connect(self.cerrar)
             
+    def cerrar(self):
+        self.close()
 
     def crear_venta(self): 
         """
@@ -143,34 +148,62 @@ class FormVenta(QtGui.QDialog):
         """
         Funcion que carga una venta
         """
+
         self.ui.cantidad.setEnabled(True)
         self.ui.precio.setEnabled(True)
         data = self.ui.grilla_prod.model()
         index = self.ui.grilla_prod.currentIndex()
-      
+        self.fila=self.ui.grilla_prod.currentIndex()
+       
         self.ui.cantidad.setText(str(data.index(index.row(), 1, QtCore.QModelIndex()).data()))
         self.ui.precio.setText(str(data.index(index.row(), 2, QtCore.QModelIndex()).data()))
-        self.ui.venta.clicked.connect(self.edita_venta)
+        
 
     def edita_venta(self): 
         """
         Funcion que edita una venta
         """
-        folio,producto,precio,cantidad= self.obtener_datos() 
+        folio = int(self.ui.folio.text())
+        detalle = db_model.obtener_ventas_formulario(folio)
+        data1 = self.ui.grilla_prod.model()
+        index = self.fila
+        producto = str(data1.index(index.row(), 0, QtCore.QModelIndex()).data())
+        cantidad = int(self.ui.cantidad.text())
+        precio = int(self.ui.precio.text())
         
-        try: 
-            db_model.editar_venta(folio,producto,cantidad,precio)
-            # Invocar la función del modelo que permite editar 
-            self.accepted.emit() 
-            msgBox = QtGui.QMessageBox() 
-            msgBox.setText(u"La Venta ha sido editado.") 
-            msgBox.exec_() 
-            self.close() 
-            print "Editar" 
+        try:
+            
+            db_model.editar_venta(folio, producto, cantidad, precio)
+            detalle = db_model.obtener_ventas_formulario(folio)
+                        
+            #Creamos el modelo asociado a la tabla
+            self.data = QtGui.QStandardItemModel(len(detalle), 4)
+            self.data.setHorizontalHeaderItem(
+                0, QtGui.QStandardItem(u"producto"))
+            self.data.setHorizontalHeaderItem(
+                1, QtGui.QStandardItem(u"cantidad"))
+            self.data.setHorizontalHeaderItem(
+                2, QtGui.QStandardItem(u"precio unitario"))
+            self.data.setHorizontalHeaderItem(
+                3, QtGui.QStandardItem(u"Total"))           
+
+            for r, row in enumerate(detalle):
+                index = self.data.index(r, 0, QtCore.QModelIndex())
+                self.data.setData(index, row['producto_sku'])
+                index = self.data.index(r, 1, QtCore.QModelIndex())
+                self.data.setData(index, row['cantidad'])
+                index = self.data.index(r, 2, QtCore.QModelIndex())
+                self.data.setData(index, row['precio_unitario'])
+                index = self.data.index(r, 3, QtCore.QModelIndex())
+                self.data.setData(index, row['total'])               
+
+            self.ui.grilla_prod.setModel(self.data)
+            
         except sqlite3.Error as e: 
             msgBox = QtGui.QMessageBox()
             msgBox.setText(u"Error, revise los datos!")
-            msgBox.exec_() 
+            msgBox.exec_()  
+
 
     def obtener_datos(self):
         """
