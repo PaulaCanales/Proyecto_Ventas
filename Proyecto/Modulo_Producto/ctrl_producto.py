@@ -21,14 +21,13 @@ class Main(QtGui.QWidget):
         self.filtrar()
         self.ui.combosku.activated[int].connect(self.onActivated_sku)
         self.ui.combonombre.activated[int].connect(self.onActivated_nombre)
-        self.signals()
         self.show()
 
     def connect_signals(self):
         self.ui.agregar.clicked.connect(self.agrega)
         self.ui.eliminar.clicked.connect(self.elimina)
         self.ui.editar.clicked.connect(self.edita)
-        self.ui.buscar.clicked.connect(self.load_data)
+        self.ui.grilla_prod.clicked.connect(self.show_poster)
 
     def agrega(self):
         self.ui.form = FormProducto(self)
@@ -101,6 +100,8 @@ class Main(QtGui.QWidget):
         self.ui.grilla_prod.setColumnWidth(7, 100)
         self.ui.grilla_prod.setColumnWidth(8, 100)
 
+
+
     def elimina(self):
         """
         Función que intenta borrar un alumno de la base de datos e
@@ -130,8 +131,6 @@ class Main(QtGui.QWidget):
             		u"Error al Eliminar el Registro")
             	return False
 
-
-
     def edita(self):
         """
         Función obtiene el producto seleccionado en la grilla
@@ -149,10 +148,10 @@ class Main(QtGui.QWidget):
             self.ui.form.accepted.connect(self.load_data)
             self.ui.form.show()
 
-    def signals(self):
-        self.ui.grilla_prod.clicked.connect(self.show_poster)
-
     def show_poster(self):
+        """
+        Funcion que muestra la imagen del producto en un label
+        """
         data = self.ui.grilla_prod.model()
         index = self.ui.grilla_prod.currentIndex()
         imagen = data.index(index.row(), 5, QtCore.QModelIndex()).data()
@@ -177,63 +176,65 @@ class Main(QtGui.QWidget):
     def onActivated_sku(self, index1):
 
         sku = self.ui.combosku.itemText(index1)
-        lista=[]
-        producto = db_model.producto_sku(sku)
-        lista.append(producto)
-        #Creamos el modelo asociado a la tabla
-        self.data = QtGui.QStandardItemModel(len(lista), 8)
-        self.data.setHorizontalHeaderItem(
-            0, QtGui.QStandardItem(u"ID"))
-        self.data.setHorizontalHeaderItem(
-            1, QtGui.QStandardItem(u"Nombre"))
-        self.data.setHorizontalHeaderItem(
-            2, QtGui.QStandardItem(u"Descripcion"))
-        self.data.setHorizontalHeaderItem(
-            3, QtGui.QStandardItem(u"Marca"))
-        self.data.setHorizontalHeaderItem(
-            4, QtGui.QStandardItem(u"Color"))
-        self.data.setHorizontalHeaderItem(
-            5, QtGui.QStandardItem(u"Imagen"))
-        self.data.setHorizontalHeaderItem(
-            6, QtGui.QStandardItem(u"Precio"))
-        self.data.setHorizontalHeaderItem(
-            7, QtGui.QStandardItem(u"Cantidad"))
-        self.data.setHorizontalHeaderItem(
-            8, QtGui.QStandardItem(u"Total"))
+        if sku=="":
+            self.load_data()
+        else:
+            lista=[]
+            producto = db_model.producto_sku(sku)
+            lista.append(producto)
+            #Creamos el modelo asociado a la tabla
+            self.data = QtGui.QStandardItemModel(len(lista), 8)
+            self.data.setHorizontalHeaderItem(
+                0, QtGui.QStandardItem(u"ID"))
+            self.data.setHorizontalHeaderItem(
+                1, QtGui.QStandardItem(u"Nombre"))
+            self.data.setHorizontalHeaderItem(
+                2, QtGui.QStandardItem(u"Descripcion"))
+            self.data.setHorizontalHeaderItem(
+                3, QtGui.QStandardItem(u"Marca"))
+            self.data.setHorizontalHeaderItem(
+                4, QtGui.QStandardItem(u"Color"))
+            self.data.setHorizontalHeaderItem(
+                5, QtGui.QStandardItem(u"Imagen"))
+            self.data.setHorizontalHeaderItem(
+                6, QtGui.QStandardItem(u"Precio"))
+            self.data.setHorizontalHeaderItem(
+                7, QtGui.QStandardItem(u"Cantidad"))
+            self.data.setHorizontalHeaderItem(
+                8, QtGui.QStandardItem(u"Total"))
 
+            for r, row in enumerate(lista):
+            	index = self.data.index(r, 0, QtCore.QModelIndex())
+            	self.data.setData(index, row['sku'])
+            	index = self.data.index(r, 1, QtCore.QModelIndex())
+            	self.data.setData(index, row['nombre'])
+            	index = self.data.index(r, 2, QtCore.QModelIndex())
+            	self.data.setData(index, row['descripcion'])
+            	index = self.data.index(r, 3, QtCore.QModelIndex())
+            	self.data.setData(index, row['marca'])
+            	index = self.data.index(r, 4, QtCore.QModelIndex())
+            	self.data.setData(index, row['color'])
+            	index = self.data.index(r, 5, QtCore.QModelIndex())
+            	self.data.setData(index, row['imagen'])
+            	index = self.data.index(r, 6, QtCore.QModelIndex())
+            	self.data.setData(index, row['Precio'])
+            	index = self.data.index(r, 7, QtCore.QModelIndex())
+            	cantidad_producto= db_model.obtener_CantidadProducto(row['sku'])
+            	self.data.setData(index, cantidad_producto)
+            	index = self.data.index(r, 8, QtCore.QModelIndex())
 
-        for r, row in enumerate(lista):
-        	index = self.data.index(r, 0, QtCore.QModelIndex())
-        	self.data.setData(index, row['sku'])
-        	index = self.data.index(r, 1, QtCore.QModelIndex())
-        	self.data.setData(index, row['nombre'])
-        	index = self.data.index(r, 2, QtCore.QModelIndex())
-        	self.data.setData(index, row['descripcion'])
-        	index = self.data.index(r, 3, QtCore.QModelIndex())
-        	self.data.setData(index, row['marca'])
-        	index = self.data.index(r, 4, QtCore.QModelIndex())
-        	self.data.setData(index, row['color'])
-        	index = self.data.index(r, 5, QtCore.QModelIndex())
-        	self.data.setData(index, row['imagen'])
-        	index = self.data.index(r, 6, QtCore.QModelIndex())
-        	self.data.setData(index, row['Precio'])
-        	index = self.data.index(r, 7, QtCore.QModelIndex())
-        	cantidad_producto= db_model.obtener_CantidadProducto(row['sku'])
-        	self.data.setData(index, cantidad_producto)
-        	index = self.data.index(r, 8, QtCore.QModelIndex())
+            	self.data.setData(index, cantidad_producto*row['Precio'])
+            self.ui.grilla_prod.setModel(self.data)
 
-        	self.data.setData(index, cantidad_producto*row['Precio'])
-        self.ui.grilla_prod.setModel(self.data)
-
-        self.ui.grilla_prod.setColumnWidth(0, 100)
-        self.ui.grilla_prod.setColumnWidth(1, 150)
-        self.ui.grilla_prod.setColumnWidth(2, 200)
-        self.ui.grilla_prod.setColumnWidth(3, 100)
-        self.ui.grilla_prod.setColumnWidth(4, 100)
-        self.ui.grilla_prod.setColumnWidth(5, 200)
-        self.ui.grilla_prod.setColumnWidth(6, 100)
-        self.ui.grilla_prod.setColumnWidth(7, 100)
-        self.ui.grilla_prod.setColumnWidth(8, 100)
+            self.ui.grilla_prod.setColumnWidth(0, 100)
+            self.ui.grilla_prod.setColumnWidth(1, 150)
+            self.ui.grilla_prod.setColumnWidth(2, 200)
+            self.ui.grilla_prod.setColumnWidth(3, 100)
+            self.ui.grilla_prod.setColumnWidth(4, 100)
+            self.ui.grilla_prod.setColumnWidth(5, 200)
+            self.ui.grilla_prod.setColumnWidth(6, 100)
+            self.ui.grilla_prod.setColumnWidth(7, 100)
+            self.ui.grilla_prod.setColumnWidth(8, 100)
 
     def onActivated_nombre(self, index1):
 

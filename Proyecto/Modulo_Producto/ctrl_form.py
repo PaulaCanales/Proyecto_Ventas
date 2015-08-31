@@ -71,6 +71,7 @@ class FormProducto(QtGui.QDialog):
             pass
 
     def editar_producto(self):
+
         sku, nombres, descripcion, marca, color, imagen, precio = self.obtener_datos()
         try:
             model.editar_producto(sku, nombres, descripcion, marca, color, imagen, precio)# Invocar la función del modelo que permite editar
@@ -88,5 +89,3 @@ class FormProducto(QtGui.QDialog):
             None, filter="Image Files (*.jpg *.png *.gif);;"
                         "Todos los archivos (*.*)")
         self.ui.imagen.setText(str(filename[0]))
-        
-    

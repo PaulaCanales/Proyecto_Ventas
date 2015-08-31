@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sqlite3
-
+import os
 
 def conectar():
     con = sqlite3.connect('../SistemaVentas.db')
@@ -55,7 +55,14 @@ def producto_nom(nombre):
     con.close()
     return producto
 
-
+def producto_img(sku):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT imagen FROM producto WHERE sku = ?"
+    resultado = c.execute(query, [sku])
+    producto = resultado.fetchone()
+    con.close()
+    return producto[0]
 
 def crear_producto(sku, nombre, descripcion, marca, color, imagen, Precio):
     con = conectar()
@@ -75,6 +82,8 @@ def editar_producto(sku, nombre,descripcion,marca,color,imagen,Precio):
     con.commit()
 
 def borrar(sku):
+    img=producto_img(sku)
+    os.system("rm "+img)
     exito = False
     con = conectar()
     c = con.cursor()
