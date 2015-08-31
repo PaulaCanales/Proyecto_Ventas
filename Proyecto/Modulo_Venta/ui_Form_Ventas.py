@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Form_ventas.ui'
 #
-# Created: Sun Aug 30 13:07:57 2015
+# Created: Sun Aug 30 21:41:21 2015
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,9 +23,6 @@ class Ui_Form(object):
         self.comboRut.addItem("")
         self.comboRut.setItemText(0, "")
         self.gridLayout.addWidget(self.comboRut, 0, 1, 1, 1)
-        self.pushButton = QtGui.QPushButton(Form)
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.pushButton, 0, 2, 1, 1)
         self.label_5 = QtGui.QLabel(Form)
         self.label_5.setObjectName("label_5")
         self.gridLayout.addWidget(self.label_5, 2, 0, 1, 1)
@@ -57,6 +54,7 @@ class Ui_Form(object):
         self.aceptar.setObjectName("aceptar")
         self.gridLayout.addWidget(self.aceptar, 6, 1, 1, 1)
         self.grilla_prod = QtGui.QTableView(Form)
+        self.grilla_prod.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.grilla_prod.setAlternatingRowColors(True)
         self.grilla_prod.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.grilla_prod.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
@@ -69,8 +67,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-        Form.setTabOrder(self.comboRut, self.pushButton)
-        Form.setTabOrder(self.pushButton, self.folio)
+        Form.setTabOrder(self.comboRut, self.folio)
         Form.setTabOrder(self.folio, self.id_prod)
         Form.setTabOrder(self.id_prod, self.precio)
         Form.setTabOrder(self.precio, self.cantidad)
@@ -81,7 +78,6 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "Rut Cliente", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton.setText(QtGui.QApplication.translate("Form", "Nuevo Cliente", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("Form", "ID Producto", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Form", "Precio", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("Form", "Cantidad", None, QtGui.QApplication.UnicodeUTF8))

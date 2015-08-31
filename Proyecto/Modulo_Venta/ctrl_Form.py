@@ -18,8 +18,9 @@ class FormVenta(QtGui.QDialog):
         self.ui.setupUi(self)
 
         if folio is None:
-            self.ui.pushButton.clicked.connect(self.crear_cliente)
+            
             self.ui.aceptar.clicked.connect(self.crear_venta)
+            self.ui.venta.clicked.connect(self.crear_venta2)
             rut= db_model.obtener_rut()
             for dato in range(len(rut)):
                 self.ui.comboRut.addItem(str(rut[dato][0]))
@@ -111,11 +112,17 @@ class FormVenta(QtGui.QDialog):
             msgBox.exec_() 
 
     def crear_venta2(self):
-        pass
-        
+        rut=int(self.ui.comboRut.currentText ())
+        folio = self.ui.folio.text()
+        try:
+            db_model.crear_venta(int(folio), rut)
+            self.close()
 
-    def crear_cliente(self):
-        pass
+        except sqlite3.Error as e: 
+            msgBox = QtGui.QMessageBox()
+            msgBox.setText(u"Error !")
+            msgBox.exec_() 
+        
 
     def carga_venta(self):
         

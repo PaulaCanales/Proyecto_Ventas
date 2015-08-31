@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import datetime
+from datetime import date
 import sqlite3
 
 def conectar():
